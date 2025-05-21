@@ -1,0 +1,46 @@
+.ucvibe-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.ucvibe-link:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+header {
+  background-color: #00274c;
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

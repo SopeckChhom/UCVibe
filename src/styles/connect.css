@@ -1,0 +1,27 @@
+/* ========== Connect With Us Section ========== */
+.connect {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #0077cc;
+  color: white;
+}
+
+.connect p {
+  margin: 1rem 0;
+}
+
+.contact-link {
+  text-decoration: none;
+  color: white;
+  background-color: #00274c;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.contact-link:hover {
+  background-color: #00508d;
+}

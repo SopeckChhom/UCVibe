@@ -1,0 +1,65 @@
+/* Collapsible.css */
+
+.collapsible-section {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+}
+
+.collapsible-section h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00274c;
+}
+
+.toggle-symbol {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.dining-list {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dining-list.active {
+  display: flex;
+}
+
+.rating-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rating-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.rate-button,
+.rating-card button {
+  padding: 0.5rem 1rem;
+  background-color: #00274c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rate-button:hover,
+.rating-card button:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,124 @@
+.map-heading {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  background-color: #00274c;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  #map {
+    height: 250px;
+    max-width: 100%;
+  }
+}
+
+/* Collapsible Dining Halls */
+.dining-halls-container {
+  background-color: white;
+  padding: 1rem 2rem;
+  margin: 2rem 18rem 1rem 18rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dining-halls-container:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.dining-halls-container h2 {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #003366;
+}
+
+.toggle-symbol {
+  color: black;
+  padding: 0.2rem 0.7rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dining-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dining-list.active {
+  max-height: 500px;
+}
+
+.rating-card {
+  background-color: #e6f0ff;
+  color: #00274c;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rating-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.rating-card a,
+.rating-card button {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background-color: #0077cc;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.rating-card a:hover,
+.rating-card button:hover {
+  background-color: #005fa3;
+}
+
+.toggle-symbol {
+  color: rgb(0, 0, 0);
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: background-color 0.2s ease;
+}
+
+/* Dining list (collapsible content) */
+.dining-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dining-list.active {
+  max-height: 500px; /* Adjust based on content size */
+}

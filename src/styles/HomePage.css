@@ -1,0 +1,82 @@
+/* ========== Hero Section ========== */
+.hero {
+  background-color: #ffd700;
+  color: #00274c;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+/* ========== Content Intro Section ========== */
+.content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== Feature Banner Section ========== */
+.what-we-do {
+  text-align: center;
+}
+
+.feature-banner {
+  width: 100vw;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-banner img {
+  width: 100vw;
+  height: 500px; /* Match the banner height exactly */
+  object-fit: cover;
+  display: block;
+  filter: brightness(60%);
+}
+.overlay-messages {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 16rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 700;
+}
+
+/* ========== Connect Section ========== */
+.connect {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 2rem;
+}
+
+.contact-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #00274c;
+  border: 2px solid #00274c;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.contact-link:hover {
+  background-color: #00274c;
+  color: white;
+}
