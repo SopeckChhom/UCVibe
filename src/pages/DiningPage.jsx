@@ -1,4 +1,3 @@
-// src/pages/UcscDiningPage.jsx
 import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -13,7 +12,13 @@ import "../styles/DiningPage.css";
 import "../styles/Collapsible.css";
 import "../styles/hero.css";
 
-function DiningPage({ title, diningHalls = [], cafes = [] }) {
+function DiningPage({
+  title,
+  diningHalls = [],
+  cafes = [],
+  mapCenter,
+  mapMarkers,
+}) {
   return (
     <>
       <NavBar />
@@ -22,6 +27,11 @@ function DiningPage({ title, diningHalls = [], cafes = [] }) {
         <h1>Find New Places to Dine at {title}!</h1>
         <p>Help us rate the best dining halls and markets on campus!</p>
       </section>
+
+      <section className="map-heading">
+        <h2>Dining Hall and Market Locations</h2>
+      </section>
+      <Map center={mapCenter} markers={mapMarkers} />
 
       {diningHalls.length > 0 && (
         <Collapsible title="Dining Halls">

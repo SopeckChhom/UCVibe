@@ -1,37 +1,27 @@
 import React, { useEffect } from "react";
+import { useGoogleMaps } from "../hooks/useGoogleMaps";
 import "../styles/Map.css";
 
-function Map() {
+function Map({ center, markers = [] }) {
+  const mapLoaded = useGoogleMaps("AIzaSyAMjJMiV-VG9Esth30DzM_Jgze_OY1a5ik");
+
   useEffect(() => {
-    const initMap = () => {
-      const ucsc_map = { lat: 36.9914, lng: -122.0609 };
-      const mapContainer = document.getElementById("map");
-      if (!mapContainer) return;
+    if (!mapLoaded) return;
 
-      const map = new window.google.maps.Map(mapContainer, {
-        zoom: 15,
-        center: ucsc_map,
-      });
+    const mapContainer = document.getElementById("map");
+    if (!mapContainer) return;
 
-      new window.google.maps.Marker({
-        position: { lat: 36.9992, lng: -122.0587 },
-        map,
-        title: "John R. Lewis & College Nine Dining Hall",
-      });
+    const map = new window.google.maps.Map(mapContainer, {
+      zoom: 15,
+      center,
+    });
 
-      new window.google.maps.Marker({
-        position: { lat: 36.9972, lng: -122.0549 },
-        map,
-        title: "Cowell & Stevenson Dining Hall",
-      });
-    };
+    markers.forEach(({ position, title }) => {
+      new window.google.maps.Marker({ position, map, title });
+    });
+  }, [mapLoaded, center, markers]);
 
-    if (window.google) {
-      initMap();
-    }
-  }, []);
-
-  return <div id="map" style={{ height: "400px", width: "100%" }}></div>;
+  return <div id="map" style={{ height: "400px", width: "100%" }} />;
 }
 
 export default Map;

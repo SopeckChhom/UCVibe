@@ -27,6 +27,8 @@ function DynamicDiningRoute() {
       title={data.title}
       diningHalls={data.diningHalls}
       cafes={data.cafes}
+      mapCenter={data.mapCenter} // ✅ required for Map
+      mapMarkers={data.mapMarkers} // ✅ required for Map
     />
   );
 }
