@@ -9,6 +9,7 @@ import {
 import HomePage from "./pages/HomePage";
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
+import UCBPage from "./campuses/ucb/UCBPage";
 import DiningPage from "./pages/DiningPage";
 import RateDiningPage from "./pages/RateDiningPage";
 
@@ -27,6 +28,7 @@ function DynamicDiningRoute() {
       title={data.title}
       diningHalls={data.diningHalls}
       cafes={data.cafes}
+      markets={data.markets}
       mapCenter={data.mapCenter} // ✅ required for Map
       mapMarkers={data.mapMarkers} // ✅ required for Map
     />
@@ -40,6 +42,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/ucsc" element={<UCSCPage />} />
         <Route path="/ucla" element={<UCLAPage />} />
+        <Route path="/ucb" element={<UCBPage />} />
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
         <Route
           path="/:school/dining/rate/:hallId"

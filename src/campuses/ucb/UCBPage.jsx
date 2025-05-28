@@ -1,4 +1,4 @@
-// src/pages/UCLAPage.jsx
+// src/pages/UCBPage.jsx
 import React from "react";
 import "../../styles/SchoolPage.css";
 import NavBar from "../../components/NavBar";
@@ -6,13 +6,13 @@ import Footer from "../../components/Footer";
 import "../../styles/HomePage.css";
 import "../../styles/global.css";
 
-function UCLAPage() {
+function UCBPage() {
   return (
     <>
       <NavBar />
 
       <section className="hero">
-        <h1>Discover UCLA Hotspots</h1>
+        <h1>Discover UCB Hotspots</h1>
         <p>
           Navigate and rate locations across the campus—from dining to
           recreation.
@@ -22,19 +22,19 @@ function UCLAPage() {
       <section className="categories">
         <h2>Where would you like to go?</h2>
         <div className="category-list">
-          <a href="/ucla/dining" className="category-card">
+          <a href="/ucb/dining" className="category-card">
             <h3>Dining Halls & Markets</h3>
             <p>Explore and rate places to eat on campus.</p>
           </a>
-          <a href="/ucla/lecture-halls" className="category-card">
+          <a href="/ucb/lecture-halls" className="category-card">
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
           </a>
-          <a href="/ucla/recreation" className="category-card">
+          <a href="/ucb/recreation" className="category-card">
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </a>
-          <a href="/ucla/study-spots" className="category-card">
+          <a href="/ucb/study-spots" className="category-card">
             <h3>Study Spots</h3>
             <p>Share your favorite quiet corners for studying.</p>
           </a>
@@ -43,10 +43,10 @@ function UCLAPage() {
 
       <section className="campus-image">
         <div className="overlay-messages">
-          <h2>Explore UC Los Angeles!</h2>
+          <h2>Explore UC Berkley!</h2>
         </div>
         <img
-          src="https://wallpapers.com/images/hd/ucla-campus-q74mkup6pszhqe37.jpg"
+          src="https://2u.com/static/d91a9ec29e0b55c83f4e970b5c4b8350/0b6c6/campanile-clock-tower-berkeley_EkwFCde.max-2880x1800.jpg"
           alt="UCSC Campus"
         />
       </section>
@@ -64,4 +64,4 @@ function UCLAPage() {
   );
 }
 
-export default UCLAPage;
+export default UCBPage;

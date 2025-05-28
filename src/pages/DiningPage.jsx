@@ -16,6 +16,7 @@ function DiningPage({
   title,
   diningHalls = [],
   cafes = [],
+  markets = [],
   mapCenter,
   mapMarkers,
 }) {
@@ -29,7 +30,7 @@ function DiningPage({
       </section>
 
       <section className="map-heading">
-        <h2>Dining Hall and Market Locations</h2>
+        <h2>Dining and Market Locations</h2>
       </section>
       <Map center={mapCenter} markers={mapMarkers} />
 
@@ -49,6 +50,19 @@ function DiningPage({
       {cafes.length > 0 && (
         <Collapsible title="Cafes">
           {cafes.map((cafe, i) => (
+            <div key={i} className="rating-card">
+              <h3>{cafe.name}</h3>
+              <a href={cafe.link} className="rate-button">
+                Rate
+              </a>
+            </div>
+          ))}
+        </Collapsible>
+      )}
+
+      {markets.length > 0 && (
+        <Collapsible title="Markets">
+          {markets.map((cafe, i) => (
             <div key={i} className="rating-card">
               <h3>{cafe.name}</h3>
               <a href={cafe.link} className="rate-button">

@@ -1,15 +1,27 @@
 export const schoolDiningData = {
   ucsc: {
     title: "UC Santa Cruz",
-    mapCenter: { lat: 36.9914, lng: -122.0609 },
+    mapCenter: { lat: 36.995, lng: -122.06 },
     mapMarkers: [
       {
-        position: { lat: 36.9992, lng: -122.0587 },
+        position: { lat: 37.001, lng: -122.058 },
         title: "John R. Lewis & College Nine Dining Hall",
       },
       {
         position: { lat: 36.9972, lng: -122.0549 },
         title: "Cowell & Stevenson Dining Hall",
+      },
+      {
+        position: { lat: 36.9944, lng: -122.06535 },
+        title: "Porter & Kresge Dining Hall",
+      },
+      {
+        position: { lat: 36.991, lng: -122.0645 },
+        title: "Rachel Carson & Oakes Dining Hall",
+      },
+      {
+        position: { lat: 36.974, lng: -122.0587 },
+        title: "Crown & Merrill Dining Hall",
       },
     ],
     diningHalls: [
@@ -21,10 +33,27 @@ export const schoolDiningData = {
         name: "John R. Lewis Dining Hall",
         link: "/ucsc/dining/rate/johnlewis",
       },
+      {
+        name: "Rachel Carson & Oakes Dining Hall",
+        link: "/ucsc/dining/rate/rachelcarson",
+      },
+      {
+        name: "Crown & Merrill Dining Hall",
+        link: "/ucsc/dining/rate/crown",
+      },
+      {
+        name: "Porter & Kresge Dining Hall",
+        link: "/ucsc/dining/rate/porter",
+      },
     ],
     cafes: [
       { name: "Oakes' Cafe", link: "/ucsc/dining/rate/oakes" },
       { name: "Global Village Cafe", link: "/ucsc/dining/rate/global" },
+    ],
+    markets: [
+      { name: "Merril Market", link: "/ucsc/dining/rate/merril-market" },
+      { name: "Porter Market", link: "/ucsc/dining/rate/porter-market" },
+      { name: "Slug Stop", link: "/ucsc/dining/rate/slug-stop" },
     ],
   },
 
