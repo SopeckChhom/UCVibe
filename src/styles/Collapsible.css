@@ -63,3 +63,12 @@
 .rating-card button:hover {
   opacity: 0.9;
 }
+
+.dining-list.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 500px; /* or remove if you want it to grow fully */
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}

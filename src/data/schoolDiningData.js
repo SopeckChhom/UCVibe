@@ -84,4 +84,29 @@ export const schoolDiningData = {
       { name: "Cafe 1919", link: "/ucla/dining/rate/1919" },
     ],
   },
+
+  ucb: {
+    title: "UC Berkeley",
+    mapCenter: { lat: 37.8719, lng: -122.2585 },
+    mapMarkers: [
+      {
+        position: { lat: 37.87, lng: -122.259 },
+        title: "Crossroads Dining Hall",
+      },
+      {
+        position: { lat: 37.873, lng: -122.26 },
+        title: "Clark Kerr Dining Commons",
+      },
+    ],
+    diningHalls: [
+      {
+        name: "Crossroads Dining Hall",
+        link: "/ucb/dining/rate/crossroads",
+      },
+      {
+        name: "Clark Kerr Dining Commons",
+        link: "/ucb/dining/rate/clarkkerr",
+      },
+    ],
+  },
 };
