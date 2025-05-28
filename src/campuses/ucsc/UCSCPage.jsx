@@ -1,5 +1,6 @@
 // src/pages/UCSCPage.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../styles/SchoolPage.css";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
@@ -22,22 +23,22 @@ function UCSCPage() {
       <section className="categories">
         <h2>Where would you like to go?</h2>
         <div className="category-list">
-          <a href="/ucsc/dining" className="category-card">
+          <Link to="/ucsc/dining" className="category-card">
             <h3>Dining Halls & Markets</h3>
             <p>Explore and rate places to eat on campus.</p>
-          </a>
-          <a href="/ucsc/lecture-halls" className="category-card">
+          </Link>
+          <Link to="/ucsc/lecture" className="category-card">
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
-          </a>
-          <a href="/ucsc/recreation" className="category-card">
+          </Link>
+          <Link to="/ucsc/recreation" className="category-card">
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
-          </a>
-          <a href="/ucsc/study-spots" className="category-card">
+          </Link>
+          <Link to="/ucsc/study-spots" className="category-card">
             <h3>Study Spots</h3>
             <p>Share your favorite quiet corners for studying.</p>
-          </a>
+          </Link>
         </div>
       </section>
 

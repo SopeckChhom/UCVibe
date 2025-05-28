@@ -122,3 +122,56 @@
 .dining-list.active {
   max-height: 500px; /* Adjust based on content size */
 }
+
+.rating-card-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.view-button,
+.rate-button {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.view-button {
+  background-color: #ddd;
+  color: #333;
+}
+
+.rate-button {
+  background-color: #00274c;
+  color: white;
+}
+
+/*==== LecturePage.jsx ==== */
+.search-bar-wrapper {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.rating-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.view-button {
+  padding: 0.5rem 1rem;
+  background-color: #ccc;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+}

@@ -1,3 +1,11 @@
+const generateLink = (school, category, id) => `/${school}/dining/rate/${id}`;
+
+const withLinks = (school, category, items) =>
+  items.map((item) => ({
+    ...item,
+    link: generateLink(school, category, item.id),
+  }));
+
 export const schoolDiningData = {
   ucsc: {
     title: "UC Santa Cruz",
@@ -24,65 +32,41 @@ export const schoolDiningData = {
         title: "Crown & Merrill Dining Hall",
       },
     ],
-    diningHalls: [
-      {
-        name: "Cowell & Stevenson Dining Hall",
-        link: "/ucsc/dining/rate/cowell",
-      },
-      {
-        name: "John R. Lewis Dining Hall",
-        link: "/ucsc/dining/rate/johnlewis",
-      },
-      {
-        name: "Rachel Carson & Oakes Dining Hall",
-        link: "/ucsc/dining/rate/rachelcarson",
-      },
-      {
-        name: "Crown & Merrill Dining Hall",
-        link: "/ucsc/dining/rate/crown",
-      },
-      {
-        name: "Porter & Kresge Dining Hall",
-        link: "/ucsc/dining/rate/porter",
-      },
-    ],
-    cafes: [
-      { name: "Oakes' Cafe", link: "/ucsc/dining/rate/oakes" },
-      { name: "Global Village Cafe", link: "/ucsc/dining/rate/global" },
-    ],
-    markets: [
-      { name: "Merril Market", link: "/ucsc/dining/rate/merril-market" },
-      { name: "Porter Market", link: "/ucsc/dining/rate/porter-market" },
-      { name: "Slug Stop", link: "/ucsc/dining/rate/slug-stop" },
-    ],
+    diningHalls: withLinks("ucsc", "dining", [
+      { name: "Cowell & Stevenson Dining Hall", id: "cowell" },
+      { name: "John R. Lewis Dining Hall", id: "johnlewis" },
+      { name: "Rachel Carson & Oakes Dining Hall", id: "rachelcarson" },
+      { name: "Crown & Merrill Dining Hall", id: "crown" },
+      { name: "Porter & Kresge Dining Hall", id: "porter" },
+    ]),
+    cafes: withLinks("ucsc", "dining", [
+      { name: "Oakes' Cafe", id: "oakes" },
+      { name: "Global Village Cafe", id: "global" },
+    ]),
+    markets: withLinks("ucsc", "dining", [
+      { name: "Merril Market", id: "merril-market" },
+      { name: "Porter Market", id: "porter-market" },
+      { name: "Slug Stop", id: "slug-stop" },
+    ]),
   },
 
   ucla: {
     title: "UCLA",
     mapCenter: { lat: 34.0715, lng: -118.45 },
     mapMarkers: [
-      {
-        position: { lat: 34.0722, lng: -118.4496 },
-        title: "De Neve Dining",
-      },
-      {
-        position: { lat: 34.0701, lng: -118.4514 },
-        title: "Bruin Plate",
-      },
-      {
-        position: { lat: 34.0729, lng: -118.4475 },
-        title: "Covel Commons",
-      },
+      { position: { lat: 34.0722, lng: -118.4496 }, title: "De Neve Dining" },
+      { position: { lat: 34.0701, lng: -118.4514 }, title: "Bruin Plate" },
+      { position: { lat: 34.0729, lng: -118.4475 }, title: "Covel Commons" },
     ],
-    diningHalls: [
-      { name: "De Neve Dining", link: "/ucla/dining/rate/deneve" },
-      { name: "Bruin Plate", link: "/ucla/dining/rate/bruinplate" },
-      { name: "Covel Commons", link: "/ucla/dining/rate/covel" },
-    ],
-    cafes: [
-      { name: "Kerckhoff Coffee House", link: "/ucla/dining/rate/kerckhoff" },
-      { name: "Cafe 1919", link: "/ucla/dining/rate/1919" },
-    ],
+    diningHalls: withLinks("ucla", "dining", [
+      { name: "De Neve Dining", id: "deneve" },
+      { name: "Bruin Plate", id: "bruinplate" },
+      { name: "Covel Commons", id: "covel" },
+    ]),
+    cafes: withLinks("ucla", "dining", [
+      { name: "Kerckhoff Coffee House", id: "kerckhoff" },
+      { name: "Cafe 1919", id: "1919" },
+    ]),
   },
 
   ucb: {
@@ -98,15 +82,9 @@ export const schoolDiningData = {
         title: "Clark Kerr Dining Commons",
       },
     ],
-    diningHalls: [
-      {
-        name: "Crossroads Dining Hall",
-        link: "/ucb/dining/rate/crossroads",
-      },
-      {
-        name: "Clark Kerr Dining Commons",
-        link: "/ucb/dining/rate/clarkkerr",
-      },
-    ],
+    diningHalls: withLinks("ucb", "dining", [
+      { name: "Crossroads Dining Hall", id: "crossroads" },
+      { name: "Clark Kerr Dining Commons", id: "clarkkerr" },
+    ]),
   },
 };

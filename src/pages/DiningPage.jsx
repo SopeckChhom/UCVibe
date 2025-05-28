@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Map from "../components/Map";
@@ -20,6 +21,8 @@ function DiningPage({
   mapCenter,
   mapMarkers,
 }) {
+  const { school } = useParams(); // 👈 get school dynamically from URL
+
   return (
     <>
       <NavBar />
@@ -39,9 +42,20 @@ function DiningPage({
           {diningHalls.map((hall, i) => (
             <div key={i} className="rating-card">
               <h3>{hall.name}</h3>
-              <a href={hall.link} className="rate-button">
-                Rate
-              </a>
+              <div className="rating-card-buttons">
+                <a
+                  href={`/${school}/dining/view/${hall.id}`}
+                  className="view-button"
+                >
+                  View
+                </a>
+                <a
+                  href={`/${school}/dining/rate/${hall.id}`}
+                  className="rate-button"
+                >
+                  Rate
+                </a>
+              </div>
             </div>
           ))}
         </Collapsible>
@@ -52,9 +66,20 @@ function DiningPage({
           {cafes.map((cafe, i) => (
             <div key={i} className="rating-card">
               <h3>{cafe.name}</h3>
-              <a href={cafe.link} className="rate-button">
-                Rate
-              </a>
+              <div className="rating-card-buttons">
+                <a
+                  href={`/${school}/dining/view/${cafe.id}`}
+                  className="view-button"
+                >
+                  View
+                </a>
+                <a
+                  href={`/${school}/dining/rate/${cafe.id}`}
+                  className="rate-button"
+                >
+                  Rate
+                </a>
+              </div>
             </div>
           ))}
         </Collapsible>
@@ -62,12 +87,23 @@ function DiningPage({
 
       {markets.length > 0 && (
         <Collapsible title="Markets">
-          {markets.map((cafe, i) => (
+          {markets.map((market, i) => (
             <div key={i} className="rating-card">
-              <h3>{cafe.name}</h3>
-              <a href={cafe.link} className="rate-button">
-                Rate
-              </a>
+              <h3>{market.name}</h3>
+              <div className="rating-card-buttons">
+                <a
+                  href={`/${school}/dining/view/${market.id}`}
+                  className="view-button"
+                >
+                  View
+                </a>
+                <a
+                  href={`/${school}/dining/rate/${market.id}`}
+                  className="rate-button"
+                >
+                  Rate
+                </a>
+              </div>
             </div>
           ))}
         </Collapsible>
