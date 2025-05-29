@@ -1,3 +1,4 @@
+// ...your existing imports
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
@@ -32,11 +33,17 @@ function RatePage() {
   const displayName = matchedPlace?.name || "Campus Spot";
 
   const predefinedTags = [
-    "🔥 Good Food",
-    "🧼 Clean",
-    "😎 Chill Vibe",
-    "😩 Crowded",
-    "💰 Worth It",
+    "Good Food",
+    "Clean",
+    "Chill Vibes",
+    "Cramped",
+    "Dirty",
+    "Very Hot",
+    "Super Cold",
+    "Old & Boring",
+    "Fun",
+    "Variety",
+    "Accessible",
   ];
 
   const toggleTag = (tag) => {
@@ -56,6 +63,15 @@ function RatePage() {
   const removeTag = (tag) => {
     setSelectedTags(selectedTags.filter((t) => t !== tag));
   };
+
+  const handleReviewChange = (e) => {
+    const text = e.target.value;
+    if (text.length <= 300) {
+      setReviewText(text);
+    }
+  };
+
+  const charCount = reviewText.length;
 
   const handleSubmit = () => {
     console.log("Rating:", rating);
@@ -80,7 +96,7 @@ function RatePage() {
               <StarRating onRate={setRating} />
 
               <div className="tag-selector">
-                <p className="tag-heading">Select or add tags:</p>
+                <p className="tag-heading">add tags (optional):</p>
 
                 <div className="tag-options">
                   {predefinedTags.map((tag, i) => (
@@ -120,10 +136,16 @@ function RatePage() {
 
               <textarea
                 className="review-textarea"
-                placeholder="Leave a short review..."
+                placeholder="Leave a short review (max 300 characters)..."
                 value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
+                onChange={handleReviewChange}
               />
+              <p
+                className="char-count"
+                style={{ color: charCount >= 290 ? "red" : "black" }}
+              >
+                {charCount}/300 characters
+              </p>
 
               <button
                 className="submit-review-button"
