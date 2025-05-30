@@ -72,6 +72,7 @@ function RatePage() {
     "Fun",
     "Variety",
     "Accessible",
+    "Limited",
   ];
 
   const toggleTag = (tag) => {

@@ -41,8 +41,14 @@ export const schoolDiningData = {
       { name: "Porter & Kresge Dining Hall", id: "porter" },
     ]),
     cafes: withLinks("ucsc", "cafe", [
-      { name: "Oakes' Cafe", id: "oakes" },
       { name: "Global Village Cafe", id: "global" },
+      { name: "Oakes' Cafe", id: "oakes" },
+      { name: "Owl's Nest Cafe", id: "owl" },
+      { name: "Perk: Baskin Engineering", id: "baskin-engineering" },
+      { name: "Perk: Earth & Marine Sciences", id: "earth-marine" },
+      { name: "Perk: Physical Sciences", id: "physical-sciences" },
+      { name: "stevenson Coffee House", id: "stevenson" },
+      { name: "Ucen Coffee Bar", id: "ucen" },
     ]),
     markets: withLinks("ucsc", "market", [
       { name: "Merril Market", id: "merril-market" },
@@ -85,14 +91,63 @@ export const schoolDiningData = {
         position: { lat: 37.873, lng: -122.26 },
         title: "Clark Kerr Dining Commons",
       },
+      { position: { lat: 37.8701, lng: -122.2572 }, title: "Cafe 3" },
+      {
+        position: { lat: 37.8689, lng: -122.2598 },
+        title: "Foothill Dining Commons",
+      },
     ],
     diningHalls: withLinks("ucb", "dining", [
       { name: "Crossroads Dining Hall", id: "crossroads" },
       { name: "Clark Kerr Dining Commons", id: "clarkkerr" },
+      { name: "Cafe 3", id: "cafe3" },
+      { name: "Foothill Dining Commons", id: "foothill" },
     ]),
-    cafes: withLinks("ucb", "cafe", [{ name: "Golden Bear Cafe", id: "gbc" }]),
+    cafes: withLinks("ucb", "cafe", [
+      { name: "Golden Bear Cafe", id: "gbc" },
+      { name: "Free Speech Movement Cafe", id: "fsm" },
+      { name: "Yali's Cafe", id: "yalis" },
+      { name: "Strada", id: "strada" },
+      { name: "Peet's Coffee (MLK)", id: "peets-mlk" },
+    ]),
     markets: withLinks("ucb", "market", [
       { name: "MLK Market", id: "mlk-market" },
+      { name: "Bear Market", id: "bear-market" },
+      { name: "Golden Bear Market", id: "golden-bear-market" },
+    ]),
+  },
+
+  ucsd: {
+    title: "UC San Diego",
+    mapCenter: { lat: 32.8801, lng: -117.234 },
+    mapMarkers: [
+      { position: { lat: 32.8787, lng: -117.2414 }, title: "64 Degrees" },
+      { position: { lat: 32.8804, lng: -117.2384 }, title: "Pines" },
+      {
+        position: { lat: 32.8799, lng: -117.2311 },
+        title: "OceanView Terrace",
+      },
+      { position: { lat: 32.8813, lng: -117.2333 }, title: "Canyon Vista" },
+      { position: { lat: 32.8757, lng: -117.2407 }, title: "Foodworx" },
+    ],
+    diningHalls: withLinks("ucsd", "dining", [
+      { name: "64 Degrees", id: "64degrees" },
+      { name: "Pines", id: "pines" },
+      { name: "OceanView Terrace", id: "ovt" },
+      { name: "Canyon Vista", id: "canyonvista" },
+      { name: "Foodworx", id: "foodworx" },
+    ]),
+    cafes: withLinks("ucsd", "cafe", [
+      { name: "Art of Espresso", id: "espresso" },
+      { name: "Muir Woods Coffee House", id: "muirwoods" },
+      { name: "Perks Coffee Shop", id: "perks" },
+      { name: "The Bistro", id: "bistro" },
+      { name: "Cafe Ventanas", id: "ventanas" },
+    ]),
+    markets: withLinks("ucsd", "market", [
+      { name: "Sixth Market", id: "sixth-market" },
+      { name: "Roger’s Market", id: "rogers-market" },
+      { name: "Eleanor Roosevelt Market", id: "erc-market" },
     ]),
   },
 };

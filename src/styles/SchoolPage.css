@@ -101,3 +101,9 @@ nav a {
   padding: 1rem;
   border-radius: 8px;
 }
+
+.overlay-messages h2 {
+  color: white;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}

@@ -7,9 +7,12 @@ import {
 } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
+// SCHOOL PAGES
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
+import UCSDPage from "./campuses/ucsd/UCSDPage";
+
 import DiningPage from "./pages/DiningPage";
 import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
@@ -46,6 +49,7 @@ function App() {
         <Route path="/ucsc" element={<UCSCPage />} />
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
+        <Route path="/ucsd" element={<UCSDPage />} />
 
         {/* Dining Main Page (Dynamic) */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
