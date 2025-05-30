@@ -13,24 +13,28 @@ export const schoolDiningData = {
     mapCenter: { lat: 36.9957, lng: -122.06 },
     mapMarkers: [
       {
-        position: { lat: 37.001, lng: -122.058 },
+        position: { lat: 37.00080672067694, lng: -122.0578424117574 },
         title: "John R. Lewis & College Nine Dining Hall",
       },
       {
-        position: { lat: 36.9972, lng: -122.0549 },
+        position: { lat: 36.996931835136984, lng: -122.05304883179545 },
         title: "Cowell & Stevenson Dining Hall",
       },
       {
-        position: { lat: 36.9944, lng: -122.06535 },
+        position: { lat: 36.994322462931414, lng: -122.0659051317956 },
         title: "Porter & Kresge Dining Hall",
       },
       {
-        position: { lat: 36.991, lng: -122.0645 },
+        position: { lat: 36.99170476588154, lng: -122.06540033179576 },
         title: "Rachel Carson & Oakes Dining Hall",
       },
       {
-        position: { lat: 36.974, lng: -122.0587 },
+        position: { lat: 37.00018444583257, lng: -122.05436967412444 },
         title: "Crown & Merrill Dining Hall",
+      },
+      {
+        position: { lat: 36.98933887747271, lng: -122.06336727597309 },
+        title: "Oakes' Cafe",
       },
     ],
     diningHalls: withLinks("ucsc", "dining", [
@@ -41,6 +45,7 @@ export const schoolDiningData = {
       { name: "Porter & Kresge Dining Hall", id: "porter" },
     ]),
     cafes: withLinks("ucsc", "cafe", [
+      { name: "Banana Joe's", id: "Banana-joe" },
       { name: "Global Village Cafe", id: "global" },
       { name: "Oakes' Cafe", id: "oakes" },
       { name: "Owl's Nest Cafe", id: "owl" },
@@ -84,16 +89,19 @@ export const schoolDiningData = {
     mapCenter: { lat: 37.8719, lng: -122.2585 },
     mapMarkers: [
       {
-        position: { lat: 37.87, lng: -122.259 },
+        position: { lat: 37.86711379489526, lng: -122.25617547301276 },
         title: "Crossroads Dining Hall",
       },
       {
-        position: { lat: 37.873, lng: -122.26 },
+        position: { lat: 37.86395280400732, lng: -122.24872877409213 },
         title: "Clark Kerr Dining Commons",
       },
-      { position: { lat: 37.8701, lng: -122.2572 }, title: "Cafe 3" },
       {
-        position: { lat: 37.8689, lng: -122.2598 },
+        position: { lat: 37.86769188489824, lng: -122.26042814486968 },
+        title: "Cafe 3",
+      },
+      {
+        position: { lat: 37.87556959400138, lng: -122.2560945846581 },
         title: "Foothill Dining Commons",
       },
     ],
