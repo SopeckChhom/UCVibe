@@ -140,3 +140,23 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+/* Full height layout */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  min-height: calc(
+    100vh - 100px
+  ); /* 100px is just an estimate of Nav + Footer height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rate-container {
+  flex: 1;
+}

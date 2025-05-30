@@ -1,4 +1,5 @@
-const generateLink = (school, category, id) => `/${school}/dining/rate/${id}`;
+const generateLink = (school, category, id) =>
+  `/${school}/${category}/rate/${id}`;
 
 const withLinks = (school, category, items) =>
   items.map((item) => ({
@@ -39,11 +40,11 @@ export const schoolDiningData = {
       { name: "Crown & Merrill Dining Hall", id: "crown" },
       { name: "Porter & Kresge Dining Hall", id: "porter" },
     ]),
-    cafes: withLinks("ucsc", "dining", [
+    cafes: withLinks("ucsc", "cafe", [
       { name: "Oakes' Cafe", id: "oakes" },
       { name: "Global Village Cafe", id: "global" },
     ]),
-    markets: withLinks("ucsc", "dining", [
+    markets: withLinks("ucsc", "market", [
       { name: "Merril Market", id: "merril-market" },
       { name: "Porter Market", id: "porter-market" },
       { name: "Slug Stop", id: "slug-stop" },
@@ -63,9 +64,12 @@ export const schoolDiningData = {
       { name: "Bruin Plate", id: "bruinplate" },
       { name: "Covel Commons", id: "covel" },
     ]),
-    cafes: withLinks("ucla", "dining", [
+    cafes: withLinks("ucla", "cafe", [
       { name: "Kerckhoff Coffee House", id: "kerckhoff" },
       { name: "Cafe 1919", id: "1919" },
+    ]),
+    markets: withLinks("ucla", "market", [
+      { name: "Bruin Market", id: "bruin-market" },
     ]),
   },
 
@@ -85,6 +89,10 @@ export const schoolDiningData = {
     diningHalls: withLinks("ucb", "dining", [
       { name: "Crossroads Dining Hall", id: "crossroads" },
       { name: "Clark Kerr Dining Commons", id: "clarkkerr" },
+    ]),
+    cafes: withLinks("ucb", "cafe", [{ name: "Golden Bear Cafe", id: "gbc" }]),
+    markets: withLinks("ucb", "market", [
+      { name: "MLK Market", id: "mlk-market" },
     ]),
   },
 };

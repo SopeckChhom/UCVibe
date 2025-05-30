@@ -1,11 +1,11 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../styles/ViewRatingPage.css";
 import { schoolDiningData } from "../data/schoolDiningData";
+import { schoolLectureData } from "../data/schoolLectureData";
 
-// Fake backend reviews
 const mockReviews = [
   { rating: 5, text: "Food was 🔥🔥🔥", date: "May 27, 2025" },
   { rating: 4, text: "Clean and friendly staff!", date: "May 26, 2025" },
@@ -13,14 +13,52 @@ const mockReviews = [
 ];
 
 function ViewRatingPage() {
-  const { school: schoolId, hallId: placeId } = useParams();
-  const schoolData = schoolDiningData[schoolId];
-  const diningHalls = schoolData?.diningHalls || [];
-  const matchedPlace = diningHalls.find((place) => place.id === placeId);
+  const { school: schoolId, hallId: placeId, category } = useParams();
+  const navigate = useNavigate();
+
+  const dataSource =
+    category === "lecture" ? schoolLectureData : schoolDiningData;
+  const schoolData = dataSource[schoolId];
+
+  const categoryMap = {
+    dining: "diningHalls",
+    cafe: "cafes",
+    market: "markets",
+    lecture: "lectureHalls",
+    rec: "recCenters",
+  };
+
+  const categoryKey = categoryMap[category];
+  const places = schoolData?.[categoryKey] || [];
+
+  let matchedPlace = places.find((place) => {
+    const parts = place.link.split("/");
+    return parts[parts.length - 1] === placeId;
+  });
+
+  // 🔁 Redirect to correct category if needed
+  useEffect(() => {
+    if (!matchedPlace && schoolData) {
+      const fallbackKeys = ["diningHalls", "cafes", "markets"];
+      for (let key of fallbackKeys) {
+        const fallbackPlaces = schoolData[key] || [];
+        const found = fallbackPlaces.find(
+          (place) => place.link.split("/").pop() === placeId
+        );
+        if (found) {
+          const correctedCategory = found.link.split("/")[2];
+          navigate(`/${schoolId}/${correctedCategory}/view/${placeId}`, {
+            replace: true,
+          });
+          return;
+        }
+      }
+    }
+  }, [matchedPlace, schoolData, schoolId, placeId, navigate]);
+
   const displayName = matchedPlace?.name || "Campus Spot";
 
-  // Distribution logic (mocked)
-  const ratingCounts = [2, 1, 0, 3, 5]; // index 0 = 1★, index 4 = 5★
+  const ratingCounts = [2, 1, 0, 3, 5];
   const totalRatings = ratingCounts.reduce((a, b) => a + b, 0);
   const averageRating = (
     ratingCounts.reduce((sum, count, i) => sum + count * (i + 1), 0) /
@@ -73,7 +111,7 @@ function ViewRatingPage() {
           ))}
         </div>
 
-        <Link to={`/${schoolId}/dining/rate/${placeId}`}>
+        <Link to={`/${schoolId}/${category}/rate/${placeId}`}>
           <button className="rate-button">Rate this place</button>
         </Link>
       </section>

@@ -47,21 +47,18 @@ function App() {
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
 
-        {/* Dining Pages */}
+        {/* Dining Main Page (Dynamic) */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
-        <Route path="/:school/dining/rate/:hallId" element={<RatePage />} />
+
+        {/* Rate + View Routes — universal across all categories */}
+        <Route path="/:school/:category/rate/:hallId" element={<RatePage />} />
         <Route
-          path="/:school/dining/view/:hallId"
+          path="/:school/:category/view/:hallId"
           element={<ViewRatingPage />}
         />
 
-        {/* Lecture Pages */}
+        {/* Lecture Page */}
         <Route path="/:school/lecture" element={<LecturePage />} />
-        <Route path="/:school/lecture/rate/:hallId" element={<RatePage />} />
-        <Route
-          path="/:school/lecture/view/:hallId"
-          element={<ViewRatingPage />}
-        />
       </Routes>
     </Router>
   );

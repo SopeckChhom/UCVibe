@@ -26,7 +26,7 @@ function UCLAPage() {
             <h3>Dining Halls & Markets</h3>
             <p>Explore and rate places to eat on campus.</p>
           </a>
-          <a href="/ucla/lecture-halls" className="category-card">
+          <a href="/ucla/lecture" className="category-card">
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
           </a>
