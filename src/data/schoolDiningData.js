@@ -10,7 +10,7 @@ const withLinks = (school, category, items) =>
 export const schoolDiningData = {
   ucsc: {
     title: "UC Santa Cruz",
-    mapCenter: { lat: 36.995, lng: -122.06 },
+    mapCenter: { lat: 36.9957, lng: -122.06 },
     mapMarkers: [
       {
         position: { lat: 37.001, lng: -122.058 },
