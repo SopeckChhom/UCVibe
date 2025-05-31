@@ -129,14 +129,26 @@ export const schoolDiningData = {
     title: "UC San Diego",
     mapCenter: { lat: 32.8801, lng: -117.234 },
     mapMarkers: [
-      { position: { lat: 32.8787, lng: -117.2414 }, title: "64 Degrees" },
-      { position: { lat: 32.8804, lng: -117.2384 }, title: "Pines" },
       {
-        position: { lat: 32.8799, lng: -117.2311 },
+        position: { lat: 32.87492611404597, lng: -117.24204482883547 },
+        title: "64 Degrees",
+      },
+      {
+        position: { lat: 32.87905188224633, lng: -117.24258077611825 },
+        title: "Pines",
+      },
+      {
+        position: { lat: 32.88328387067356, lng: -117.24278826077627 },
         title: "OceanView Terrace",
       },
-      { position: { lat: 32.8813, lng: -117.2333 }, title: "Canyon Vista" },
-      { position: { lat: 32.8757, lng: -117.2407 }, title: "Foodworx" },
+      {
+        position: { lat: 32.88413882984218, lng: -117.23324940310529 },
+        title: "Canyon Vista",
+      },
+      {
+        position: { lat: 32.878977179431544, lng: -117.23053556262452 },
+        title: "Foodworx",
+      },
     ],
     diningHalls: withLinks("ucsd", "dining", [
       { name: "64 Degrees", id: "64degrees" },
@@ -153,9 +165,11 @@ export const schoolDiningData = {
       { name: "Cafe Ventanas", id: "ventanas" },
     ]),
     markets: withLinks("ucsd", "market", [
-      { name: "Sixth Market", id: "sixth-market" },
-      { name: "Roger’s Market", id: "rogers-market" },
       { name: "Eleanor Roosevelt Market", id: "erc-market" },
+      { name: "Roger’s Market", id: "rogers-market" },
+      { name: "Sixth Market", id: "sixth-market" },
+      { name: "Seventh Market", id: "seventh-market" },
+      { name: "Sunshine Market", Id: "sunshine-market" },
     ]),
   },
 };
