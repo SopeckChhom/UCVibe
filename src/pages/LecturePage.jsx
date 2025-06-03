@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../styles/DiningPage.css";
 import "../styles/global.css";
-import { schoolLectureData } from "../data/schoolLectureData"; // ✅ use lecture-specific data
 
-function LecturePage() {
-  const { school } = useParams();
+function LecturePage({ title, lectureHalls = [] }) {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const data = schoolLectureData[school];
-  const lectureHalls = data?.lectureHalls || [];
 
   const filteredHalls = lectureHalls.filter((hall) =>
     hall.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -22,7 +16,7 @@ function LecturePage() {
       <NavBar />
 
       <section className="hero">
-        <h1>Explore Lecture Halls at {data?.title}</h1>
+        <h1>Explore Lecture Halls at {title}</h1>
         <p>Search and rate the spaces you’ve learned in!</p>
       </section>
 
