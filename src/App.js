@@ -18,6 +18,8 @@ import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
 import UCSDPage from "./campuses/ucsd/UCSDPage";
+import UCDPage from "./campuses/ucd/UCDPage";
+import UCIPage from "./campuses/uci/UCIPage";
 
 // === Data ===
 import { schoolDiningData } from "./data/schoolDiningData";
@@ -74,6 +76,8 @@ function App() {
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
         <Route path="/ucsd" element={<UCSDPage />} />
+        <Route path="/ucd" element={<UCDPage />} />
+        <Route path="/uci" element={<UCIPage />} />
 
         {/* === Dining Page (Dynamic) === */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />

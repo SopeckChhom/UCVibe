@@ -66,9 +66,26 @@ export const schoolDiningData = {
     title: "UCLA",
     mapCenter: { lat: 34.0715, lng: -118.45 },
     mapMarkers: [
-      { position: { lat: 34.0722, lng: -118.4496 }, title: "De Neve Dining" },
-      { position: { lat: 34.0701, lng: -118.4514 }, title: "Bruin Plate" },
-      { position: { lat: 34.0729, lng: -118.4475 }, title: "Covel Commons" },
+      {
+        position: { lat: 34.07125866969195, lng: -118.44999893941586 },
+        title: "De Neve Dining",
+      },
+      {
+        position: { lat: 34.071794773149726, lng: -118.44987880306485 },
+        title: "Bruin Plate",
+      },
+      {
+        position: { lat: 34.07299729999998, lng: -118.44999495767095 },
+        title: "Covel Commons",
+      },
+      {
+        position: { lat: 34.070599960359246, lng: -118.44340387422936 },
+        title: "Kerckhoff Coffee House",
+      },
+      {
+        position: { lat: 34.072699543080454, lng: -118.45079178772299 },
+        title: "Cafe 1919",
+      },
     ],
     diningHalls: withLinks("ucla", "dining", [
       { name: "De Neve Dining", id: "deneve" },
@@ -78,9 +95,6 @@ export const schoolDiningData = {
     cafes: withLinks("ucla", "cafe", [
       { name: "Kerckhoff Coffee House", id: "kerckhoff" },
       { name: "Cafe 1919", id: "1919" },
-    ]),
-    markets: withLinks("ucla", "market", [
-      { name: "Bruin Market", id: "bruin-market" },
     ]),
   },
 
@@ -170,6 +184,99 @@ export const schoolDiningData = {
       { name: "Sixth Market", id: "sixth-market" },
       { name: "Seventh Market", id: "seventh-market" },
       { name: "Sunshine Market", Id: "sunshine-market" },
+    ]),
+  },
+
+  //fix
+  ucd: {
+    title: "UC Davis",
+    mapCenter: { lat: 38.5382, lng: -121.7617 },
+    mapMarkers: [
+      {
+        position: { lat: 38.54112, lng: -121.754224 },
+        title: "Segundo Dining Commons",
+      },
+      {
+        position: { lat: 38.540229, lng: -121.76093 },
+        title: "Tercero Dining Commons",
+      },
+      {
+        position: { lat: 38.54267, lng: -121.760792 },
+        title: "Cuarto Dining Commons",
+      },
+      {
+        position: { lat: 38.544846, lng: -121.74699 },
+        title: "Latitude Dining Commons",
+      },
+      {
+        position: { lat: 38.54212, lng: -121.75354 },
+        title: "Coffee House (CoHo)",
+      },
+    ],
+    diningHalls: withLinks("ucd", "dining", [
+      { name: "Segundo Dining Commons", id: "segundo" },
+      { name: "Tercero Dining Commons", id: "tercero" },
+      { name: "Cuarto Dining Commons", id: "cuarto" },
+      { name: "Latitude Dining Commons", id: "latitude" },
+    ]),
+    cafes: withLinks("ucd", "cafe", [
+      { name: "Coffee House (CoHo)", id: "coho" },
+      { name: "Bio Brew", id: "biobrew" },
+      { name: "Silo Market", id: "silo-market" },
+      { name: "Starbucks Memorial Union", id: "starbucks-mu" },
+      { name: "Peet's Coffee at ARC", id: "peets-arc" },
+    ]),
+    markets: withLinks("ucd", "market", [
+      { name: "Segundo Market", id: "segundo-market" },
+      { name: "Tercero Market", id: "tercero-market" },
+      { name: "Latitude Market", id: "latitude-market" },
+      { name: "Silo Market", id: "silo-market" },
+    ]),
+  },
+
+  //fix
+  uci: {
+    title: "UC Irvine",
+    mapCenter: { lat: 33.6432, lng: -117.8417 },
+    mapMarkers: [
+      {
+        position: { lat: 33.650477, lng: -117.84265 },
+        title: "Brandywine Dining Commons",
+      },
+      {
+        position: { lat: 33.64744, lng: -117.84097 },
+        title: "Anteatery",
+      },
+      {
+        position: { lat: 33.64678, lng: -117.84329 },
+        title: "The Commons",
+      },
+      {
+        position: { lat: 33.64337, lng: -117.84409 },
+        title: "Starbucks Student Center",
+      },
+      {
+        position: { lat: 33.64606, lng: -117.84212 },
+        title: "Cafe Med",
+      },
+    ],
+    diningHalls: withLinks("uci", "dining", [
+      { name: "Brandywine Dining Commons", id: "brandywine" },
+      { name: "Anteatery", id: "anteatery" },
+      { name: "The Commons", id: "commons" },
+    ]),
+    cafes: withLinks("uci", "cafe", [
+      { name: "Cafe Med", id: "cafemed" },
+      { name: "Courtyard Study Lounge Café", id: "courtyard" },
+      { name: "Starbucks Student Center", id: "starbucks" },
+      { name: "Phoenix Food Court", id: "phoenix" },
+      { name: "WPA - The Anteatery", id: "wpa-anteatery" },
+    ]),
+    markets: withLinks("uci", "market", [
+      { name: "Zot N' Go", id: "zotngo" },
+      { name: "The Hill", id: "thehill" },
+      { name: "Brandywine Market", id: "brandywine-market" },
+      { name: "Anteatery Market", id: "anteatery-market" },
     ]),
   },
 };
