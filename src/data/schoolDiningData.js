@@ -279,4 +279,206 @@ export const schoolDiningData = {
       { name: "Anteatery Market", id: "anteatery-market" },
     ]),
   },
+
+  //fix
+  ucm: {
+    title: "UC Merced",
+    mapCenter: { lat: 37.3648, lng: -120.4317 },
+    mapMarkers: [
+      {
+        position: { lat: 37.36471, lng: -120.430948 },
+        title: "Yablokoff-Wallace Dining Center",
+      },
+      {
+        position: { lat: 37.364429, lng: -120.433009 },
+        title: "Pavilion Dining Center",
+      },
+      {
+        position: { lat: 37.363956, lng: -120.431809 },
+        title: "The Summits Marketplace",
+      },
+      {
+        position: { lat: 37.364105, lng: -120.43296 },
+        title: "Bobcat Café",
+      },
+      {
+        position: { lat: 37.364189, lng: -120.432576 },
+        title: "Starbucks",
+      },
+    ],
+    diningHalls: withLinks("ucm", "dining", [
+      { name: "Yablokoff-Wallace Dining Center", id: "yablokoff-wallace" },
+      { name: "Pavilion Dining Center", id: "pavilion" },
+    ]),
+    cafes: withLinks("ucm", "cafe", [
+      { name: "Bobcat Café", id: "bobcat-cafe" },
+      { name: "The Summits Marketplace", id: "summits-marketplace" },
+      { name: "Starbucks", id: "starbucks" },
+    ]),
+    markets: withLinks("ucm", "market", [
+      { name: "The Summits Marketplace", id: "summits-marketplace" },
+      { name: "CatMart", id: "catmart" }, // CatMart is the on-campus convenience store
+    ]),
+  },
+
+  //fix
+  ucr: {
+    title: "UC Riverside",
+    mapCenter: { lat: 33.9737, lng: -117.3281 },
+    mapMarkers: [
+      {
+        position: { lat: 33.973662, lng: -117.329632 },
+        title: "Glasgow Residential Restaurant",
+      },
+      {
+        position: { lat: 33.974099, lng: -117.327254 },
+        title: "Lothian Residential Restaurant",
+      },
+      {
+        position: { lat: 33.974677, lng: -117.327901 },
+        title: "The Barn",
+      },
+      {
+        position: { lat: 33.975297, lng: -117.33144 },
+        title: "The Habit Burger Grill",
+      },
+      {
+        position: { lat: 33.975031, lng: -117.329518 },
+        title: "Starbucks @ HUB",
+      },
+      {
+        position: { lat: 33.974556, lng: -117.32726 },
+        title: "Scotty's Convenience Store",
+      },
+      {
+        position: { lat: 33.974859, lng: -117.329214 },
+        title: "Latitude 55",
+      },
+    ],
+    diningHalls: withLinks("ucr", "dining", [
+      { name: "Glasgow Residential Restaurant", id: "glasgow" },
+      { name: "Lothian Residential Restaurant", id: "lothian" },
+    ]),
+    cafes: withLinks("ucr", "cafe", [
+      { name: "The Barn", id: "the-barn" },
+      { name: "The Habit Burger Grill", id: "habit-burger" },
+      { name: "Starbucks @ HUB", id: "starbucks-hub" },
+      { name: "Coffee Bean & Tea Leaf", id: "coffee-bean" },
+      { name: "Subway", id: "subway" },
+      { name: "Chronic Tacos", id: "chronic-tacos" },
+      { name: "Panda Express", id: "panda-express" },
+      { name: "Latitude 55", id: "latitude-55" },
+    ]),
+    markets: withLinks("ucr", "market", [
+      { name: "Scotty's Convenience Store", id: "scottys" },
+      { name: "The Market at Glen Mor", id: "glen-mor-market" },
+    ]),
+  },
+
+  //fix
+  ucsf: {
+    title: "UC San Francisco",
+    mapCenter: { lat: 37.7631, lng: -122.4586 },
+    mapMarkers: [
+      {
+        position: { lat: 37.763236, lng: -122.457857 },
+        title: "Moffitt Café",
+      },
+      {
+        position: { lat: 37.763839, lng: -122.458455 },
+        title: "The View Café (Millberry Union)",
+      },
+      {
+        position: { lat: 37.766352, lng: -122.390403 },
+        title: "Mission Bay Food Court",
+      },
+      {
+        position: { lat: 37.763799, lng: -122.458749 },
+        title: "Palio Café",
+      },
+      {
+        position: { lat: 37.767702, lng: -122.391884 },
+        title: "The Pub at UCSF Mission Bay",
+      },
+    ],
+    diningHalls: withLinks("ucsf", "dining", [
+      { name: "Moffitt Café", id: "moffitt-cafe" },
+      { name: "The View Café (Millberry Union)", id: "view-cafe" },
+      { name: "Palio Café", id: "palio-cafe" },
+      { name: "The Pub at UCSF Mission Bay", id: "the-pub" },
+    ]),
+    cafes: withLinks("ucsf", "cafe", [
+      { name: "Mission Bay Food Court", id: "mission-bay-food-court" },
+      { name: "Peasant Pies", id: "peasant-pies" },
+      { name: "Starbucks (Mission Bay)", id: "starbucks-mission-bay" },
+      { name: "City Café (Parnassus)", id: "city-cafe" },
+    ]),
+    markets: withLinks("ucsf", "market", [
+      { name: "Millberry Union Market", id: "millberry-market" },
+      { name: "Mission Bay Market", id: "mission-bay-market" },
+    ]),
+  },
+
+  //fix
+  ucsb: {
+    title: "UC Santa Barbara",
+    mapCenter: { lat: 34.4139, lng: -119.8489 },
+    mapMarkers: [
+      {
+        position: { lat: 34.415453, lng: -119.847828 },
+        title: "De La Guerra Dining Commons",
+      },
+      {
+        position: { lat: 34.414273, lng: -119.856317 },
+        title: "Ortega Dining Commons",
+      },
+      {
+        position: { lat: 34.41733, lng: -119.849265 },
+        title: "Carrillo Dining Commons",
+      },
+      {
+        position: { lat: 34.414602, lng: -119.850765 },
+        title: "Portola Dining Commons",
+      },
+      {
+        position: { lat: 34.413421, lng: -119.856755 },
+        title: "Courtyard Cafe",
+      },
+      {
+        position: { lat: 34.413841, lng: -119.85083 },
+        title: "Nicoletti's",
+      },
+      {
+        position: { lat: 34.413003, lng: -119.849846 },
+        title: "UCen Dining",
+      },
+      {
+        position: { lat: 34.412622, lng: -119.847741 },
+        title: "Root 217",
+      },
+      {
+        position: { lat: 34.412978, lng: -119.855619 },
+        title: "The Arbor",
+      },
+    ],
+    diningHalls: withLinks("ucsb", "dining", [
+      { name: "De La Guerra Dining Commons", id: "de-la-guerra" },
+      { name: "Ortega Dining Commons", id: "ortega" },
+      { name: "Carrillo Dining Commons", id: "carrillo" },
+      { name: "Portola Dining Commons", id: "portola" },
+    ]),
+    cafes: withLinks("ucsb", "cafe", [
+      { name: "Courtyard Cafe", id: "courtyard-cafe" },
+      { name: "Nicoletti's", id: "nicolettis" },
+      { name: "UCen Dining", id: "ucen-dining" },
+      { name: "Root 217", id: "root-217" },
+      { name: "The Arbor", id: "the-arbor" },
+      { name: "The Club & Guest House", id: "club-guest-house" },
+    ]),
+    markets: withLinks("ucsb", "market", [
+      { name: "Tenaya Market & Eatery", id: "tenaya-market" },
+      { name: "Gaucho Certified Farmers Market", id: "farmers-market" },
+      { name: "UCen Market", id: "ucen-market" },
+    ]),
+  },
 };

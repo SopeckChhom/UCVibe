@@ -6,6 +6,16 @@ import StarRating from "../components/StarRating";
 import "../styles/RateDiningPage.css";
 import { schoolDiningData } from "../data/schoolDiningData";
 import { schoolLectureData } from "../data/schoolLectureData";
+import { schoolRecData } from "../data/schoolRecData"; // <-- Import rec center data
+
+// Move categoryMap OUTSIDE the component for cleaner useEffect!
+const categoryMap = {
+  dining: "diningHalls",
+  cafe: "cafes",
+  market: "markets",
+  lecture: "lectureHalls",
+  rec: "recCenters",
+};
 
 function RatePage() {
   const { school: schoolId, category, hallId: placeId } = useParams();
@@ -17,38 +27,36 @@ function RatePage() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [customTagInput, setCustomTagInput] = useState("");
 
-  const dataSource =
-    category === "lecture" ? schoolLectureData : schoolDiningData;
-  const schoolData = dataSource[schoolId];
-
-  const categoryMap = {
-    dining: "diningHalls",
-    cafe: "cafes",
-    market: "markets",
-    lecture: "lectureHalls",
-    rec: "recCenters",
+  // Use a mapping to choose the correct data source for each category
+  const dataSourceMap = {
+    dining: schoolDiningData,
+    cafe: schoolDiningData,
+    market: schoolDiningData,
+    lecture: schoolLectureData,
+    rec: schoolRecData,
   };
+  const dataSource = dataSourceMap[category];
+  const schoolData = dataSource?.[schoolId];
 
   const categoryKey = categoryMap[category];
   const allPlaces = schoolData?.[categoryKey] || [];
 
-  // Try to match within the given category first
-  let matchedPlace = allPlaces.find((place) => {
-    const lastSegment = place.link.split("/").pop();
-    return lastSegment === placeId;
-  });
+  // Match by id (robust!)
+  let matchedPlace = allPlaces.find((place) => place.id === placeId);
 
-  // If no match, check other categories and redirect if found
+  // If no match, check all categories and redirect if found
   useEffect(() => {
     if (!matchedPlace && schoolData) {
-      const fallbackKeys = ["diningHalls", "cafes", "markets"];
+      const fallbackKeys = Object.values(categoryMap); // includes all categories!
       for (let key of fallbackKeys) {
         const places = schoolData[key] || [];
-        const found = places.find(
-          (place) => place.link.split("/").pop() === placeId
-        );
+        const found = places.find((place) => place.id === placeId);
         if (found) {
-          const correctedCategory = found.link.split("/")[2]; // get 'cafe', 'market', etc.
+          // Get the main category by reverse lookup
+          let correctedCategory = Object.keys(categoryMap).find(
+            (k) => categoryMap[k] === key
+          );
+          if (!correctedCategory) correctedCategory = "dining";
           navigate(`/${schoolId}/${correctedCategory}/rate/${placeId}`, {
             replace: true,
           });

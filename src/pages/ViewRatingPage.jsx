@@ -5,6 +5,14 @@ import Footer from "../components/Footer";
 import "../styles/ViewRatingPage.css";
 import { schoolDiningData } from "../data/schoolDiningData";
 import { schoolLectureData } from "../data/schoolLectureData";
+import { schoolRecData } from "../data/schoolRecData"; // <-- Import rec center data
+const categoryMap = {
+  dining: "diningHalls",
+  cafe: "cafes",
+  market: "markets",
+  lecture: "lectureHalls",
+  rec: "recCenters",
+};
 
 const mockReviews = [
   { rating: 5, text: "Food was 🔥🔥🔥", date: "May 27, 2025" },
@@ -16,37 +24,44 @@ function ViewRatingPage() {
   const { school: schoolId, hallId: placeId, category } = useParams();
   const navigate = useNavigate();
 
-  const dataSource =
-    category === "lecture" ? schoolLectureData : schoolDiningData;
-  const schoolData = dataSource[schoolId];
-
-  const categoryMap = {
-    dining: "diningHalls",
-    cafe: "cafes",
-    market: "markets",
-    lecture: "lectureHalls",
-    rec: "recCenters",
+  // data sources
+  const dataSourceMap = {
+    dining: schoolDiningData,
+    cafe: schoolDiningData,
+    market: schoolDiningData,
+    lecture: schoolLectureData,
+    rec: schoolRecData,
   };
+  const dataSource = dataSourceMap[category];
+  const schoolData = dataSource?.[schoolId];
 
   const categoryKey = categoryMap[category];
   const places = schoolData?.[categoryKey] || [];
 
-  let matchedPlace = places.find((place) => {
-    const parts = place.link.split("/");
-    return parts[parts.length - 1] === placeId;
-  });
+  // Match by id
+  let matchedPlace = places.find((place) => place.id === placeId);
 
-  // 🔁 Redirect to correct category if needed
+  // Redirect to correct category if needed (across all categories)
   useEffect(() => {
     if (!matchedPlace && schoolData) {
-      const fallbackKeys = ["diningHalls", "cafes", "markets"];
+      // Try all category keys
+      const fallbackKeys = [
+        "diningHalls",
+        "cafes",
+        "markets",
+        "lectureHalls",
+        "recCenters",
+      ];
       for (let key of fallbackKeys) {
         const fallbackPlaces = schoolData[key] || [];
-        const found = fallbackPlaces.find(
-          (place) => place.link.split("/").pop() === placeId
-        );
+        const found = fallbackPlaces.find((place) => place.id === placeId);
         if (found) {
-          const correctedCategory = found.link.split("/")[2];
+          // Figure out which main category the found key is in
+          let correctedCategory = Object.keys(categoryMap).find(
+            (k) => categoryMap[k] === key
+          );
+          // If not found, fallback to 'dining'
+          if (!correctedCategory) correctedCategory = "dining";
           navigate(`/${schoolId}/${correctedCategory}/view/${placeId}`, {
             replace: true,
           });
@@ -58,6 +73,7 @@ function ViewRatingPage() {
 
   const displayName = matchedPlace?.name || "Campus Spot";
 
+  // Ratings logic (unchanged)
   const ratingCounts = [2, 1, 0, 3, 5];
   const totalRatings = ratingCounts.reduce((a, b) => a + b, 0);
   const averageRating = (

@@ -70,7 +70,7 @@ function HomePage() {
           />
           <p>UCLA</p>
         </a>
-        <a href="/ucmerced" className="campus-card">
+        <a href="/ucm" className="campus-card">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5UdYvS0BRzwm9x_aQYyN5PdRhJhwycryymg&s"
             alt="UC Merced"
