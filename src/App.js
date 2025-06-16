@@ -1,3 +1,4 @@
+// src/App.js
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -9,12 +10,15 @@ import {
 // === Pages ===
 import HomePage from "./pages/HomePage";
 import DiningPage from "./pages/DiningPage";
-import RatePage from "./pages/RatePage";
-import ViewRatingPage from "./pages/ViewRatingPage";
 import LecturePage from "./pages/LecturePage";
 import RecCenterPage from "./pages/RecCenterPage";
+import RatePage from "./pages/RatePage";
+import ViewRatingPage from "./pages/ViewRatingPage";
 
-// === School Landing Pages ===
+// === Static Content ===
+import GuidelinesPage from "./pages/GuidelinesPage";
+
+// === School Landing Pages (explicit imports) ===
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
@@ -26,20 +30,16 @@ import UCRPage from "./campuses/ucr/UCRPage";
 import UCSFPage from "./campuses/ucsf/UCSFPage";
 import UCSBPage from "./campuses/ucsb/UCSBPage";
 
-// === Data ===
+// === Mock Data ===
 import { schoolDiningData } from "./data/schoolDiningData";
 import { schoolLectureData } from "./data/schoolLectureData";
 import { schoolRecData } from "./data/schoolRecData";
 
-// === Dynamic Dining Route ===
+// ——— Dynamic Dining Route ———
 function DynamicDiningRoute() {
   const { school } = useParams();
   const data = schoolDiningData[school];
-
-  if (!data) {
-    return <h1>404 – Dining data not found for '{school}'</h1>;
-  }
-
+  if (!data) return <h1>404 – No dining data for “{school}”</h1>;
   return (
     <DiningPage
       title={data.title}
@@ -52,13 +52,11 @@ function DynamicDiningRoute() {
   );
 }
 
-// === Dynamic Lecture Route ===
+// ——— Dynamic Lecture Route ———
 function DynamicLectureRoute() {
   const { school } = useParams();
   const data = schoolLectureData[school];
-
-  if (!data) return <h1>404 - Lecture data not found for '{school}'</h1>;
-
+  if (!data) return <h1>404 – No lecture data for “{school}”</h1>;
   return (
     <LecturePage
       title={data.title}
@@ -69,14 +67,11 @@ function DynamicLectureRoute() {
   );
 }
 
+// ——— Dynamic Rec-Center Route ———
 function DynamicRecCenterRoute() {
   const { school } = useParams();
   const data = schoolRecData[school];
-
-  if (!data) {
-    return <h1>404 – Rec Center data not found for '{school}'</h1>;
-  }
-
+  if (!data) return <h1>404 – No rec-centers for “{school}”</h1>;
   return (
     <RecCenterPage
       title={data.title}
@@ -87,15 +82,14 @@ function DynamicRecCenterRoute() {
   );
 }
 
-// === Main App Router ===
-function App() {
+export default function App() {
   return (
     <Router>
       <Routes>
-        {/* === Home Page === */}
+        {/* Home */}
         <Route path="/" element={<HomePage />} />
 
-        {/* === School Landing Pages === */}
+        {/* Campus landing pages */}
         <Route path="/ucsc" element={<UCSCPage />} />
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
@@ -107,24 +101,24 @@ function App() {
         <Route path="/ucsf" element={<UCSFPage />} />
         <Route path="/ucsb" element={<UCSBPage />} />
 
-        {/* === Dining Page (Dynamic) === */}
+        {/* Dynamic category pages */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
+        <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
+        <Route path="/:school/recreation" element={<DynamicRecCenterRoute />} />
 
-        {/* === Rating & Viewing Routes === */}
+        {/* Rate & view */}
         <Route path="/:school/:category/rate/:hallId" element={<RatePage />} />
         <Route
           path="/:school/:category/view/:hallId"
           element={<ViewRatingPage />}
         />
 
-        {/* === Lecture Halls Page === */}
-        <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
+        {/* Static */}
+        <Route path="/guidelines" element={<GuidelinesPage />} />
 
-        {/* === Rec Centers Page === */}
-        <Route path="/:school/recreation" element={<DynamicRecCenterRoute />} />
+        {/* (Optional) catch-all 404 */}
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
     </Router>
   );
 }
-
-export default App;

@@ -6,3 +6,16 @@ footer {
   width: 100%;
   font-size: 0.9rem;
 }
+
+.guideline {
+  color: white;
+}
+
+.guideline:hover {
+  color: blue;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: xx-large;
+}

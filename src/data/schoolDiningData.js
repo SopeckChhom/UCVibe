@@ -8,6 +8,7 @@ const withLinks = (school, category, items) =>
   }));
 
 export const schoolDiningData = {
+  //done with locations
   ucsc: {
     title: "UC Santa Cruz",
     mapCenter: { lat: 36.9957, lng: -122.06 },
@@ -62,6 +63,7 @@ export const schoolDiningData = {
     ]),
   },
 
+  //done
   ucla: {
     title: "UCLA",
     mapCenter: { lat: 34.0715, lng: -118.45 },
@@ -98,6 +100,7 @@ export const schoolDiningData = {
     ]),
   },
 
+  //done
   ucb: {
     title: "UC Berkeley",
     mapCenter: { lat: 37.8719, lng: -122.2585 },
@@ -144,7 +147,11 @@ export const schoolDiningData = {
     mapCenter: { lat: 32.8801, lng: -117.234 },
     mapMarkers: [
       {
-        position: { lat: 32.87492611404597, lng: -117.24204482883547 },
+        position: { lat: 32.87961932472047, lng: -117.23646007566285 },
+        title: "Price Center",
+      },
+      {
+        position: { lat: 32.87488556591756, lng: -117.24201264232859 },
         title: "64 Degrees",
       },
       {
@@ -165,6 +172,7 @@ export const schoolDiningData = {
       },
     ],
     diningHalls: withLinks("ucsd", "dining", [
+      { name: "Price Center", id: "priceCenter" },
       { name: "64 Degrees", id: "64degrees" },
       { name: "Pines", id: "pines" },
       { name: "OceanView Terrace", id: "ovt" },
