@@ -14,6 +14,8 @@ import LecturePage from "./pages/LecturePage";
 import RecCenterPage from "./pages/RecCenterPage";
 import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 // === Static Content ===
 import GuidelinesPage from "./pages/GuidelinesPage";
@@ -115,7 +117,8 @@ export default function App() {
 
         {/* Static */}
         <Route path="/guidelines" element={<GuidelinesPage />} />
-
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         {/* (Optional) catch-all 404 */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
