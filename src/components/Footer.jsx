@@ -10,7 +10,7 @@ export default function Footer() {
       </div>
       <div className="guideline">
         <Link to="/guidelines" className="guideline">
-          Guidelines
+          Guidelines / Terms & Conditions / Privacy Policy
         </Link>
       </div>
     </footer>

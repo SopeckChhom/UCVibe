@@ -1,22 +1,38 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/NavBar.css";
 
-function NavBar() {
+export default function NavBar() {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
-    <header>
-      <h1>
-        <a href="/" className="ucvibe-link">
+    <header className="navbar">
+      <h1 className="navbar-title">
+        <Link to="/" className="ucvibe-link">
           UCVibe
-        </a>
+        </Link>
       </h1>
-      <nav>
-        <a href="/">Home</a>
-        <a href="#">Spots</a>
-        <a href="#">Rate</a>
-        <a href="#">About</a>
+      <nav className="navbar-nav">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+
+        {!isAuthenticated ? (
+          <>
+            <Link to="/signup" className="nav-link">
+              Sign Up
+            </Link>
+            <Link to="/login" className="nav-link">
+              Log In
+            </Link>
+          </>
+        ) : (
+          <button onClick={logout} className="nav-link logout-button">
+            Log Out
+          </button>
+        )}
       </nav>
     </header>
   );
 }
-
-export default NavBar;

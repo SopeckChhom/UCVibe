@@ -1,11 +1,5 @@
-// src/App.js
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 
 // === Pages ===
 import HomePage from "./pages/HomePage";
@@ -20,7 +14,7 @@ import SignupPage from "./pages/SignupPage";
 // === Static Content ===
 import GuidelinesPage from "./pages/GuidelinesPage";
 
-// === School Landing Pages (explicit imports) ===
+// === School Landing Pages ===
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
@@ -42,16 +36,7 @@ function DynamicDiningRoute() {
   const { school } = useParams();
   const data = schoolDiningData[school];
   if (!data) return <h1>404 – No dining data for “{school}”</h1>;
-  return (
-    <DiningPage
-      title={data.title}
-      diningHalls={data.diningHalls}
-      cafes={data.cafes}
-      markets={data.markets}
-      mapCenter={data.mapCenter}
-      mapMarkers={data.mapMarkers}
-    />
-  );
+  return <DiningPage {...data} />;
 }
 
 // ——— Dynamic Lecture Route ———
@@ -59,69 +44,54 @@ function DynamicLectureRoute() {
   const { school } = useParams();
   const data = schoolLectureData[school];
   if (!data) return <h1>404 – No lecture data for “{school}”</h1>;
-  return (
-    <LecturePage
-      title={data.title}
-      lectureHalls={data.lectureHalls}
-      mapCenter={data.mapCenter}
-      mapMarkers={data.mapMarkers}
-    />
-  );
+  return <LecturePage {...data} />;
 }
 
 // ——— Dynamic Rec-Center Route ———
 function DynamicRecCenterRoute() {
   const { school } = useParams();
   const data = schoolRecData[school];
-  if (!data) return <h1>404 – No rec-centers for “{school}”</h1>;
-  return (
-    <RecCenterPage
-      title={data.title}
-      recCenters={data.recCenters}
-      mapCenter={data.mapCenter}
-      mapMarkers={data.mapMarkers}
-    />
-  );
+  if (!data) return <h1>404 – No rec centers for “{school}”</h1>;
+  return <RecCenterPage {...data} />;
 }
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Home */}
-        <Route path="/" element={<HomePage />} />
+    <Routes>
+      {/* Home */}
+      <Route path="/" element={<HomePage />} />
 
-        {/* Campus landing pages */}
-        <Route path="/ucsc" element={<UCSCPage />} />
-        <Route path="/ucla" element={<UCLAPage />} />
-        <Route path="/ucb" element={<UCBPage />} />
-        <Route path="/ucsd" element={<UCSDPage />} />
-        <Route path="/ucd" element={<UCDPage />} />
-        <Route path="/uci" element={<UCIPage />} />
-        <Route path="/ucm" element={<UCMPage />} />
-        <Route path="/ucr" element={<UCRPage />} />
-        <Route path="/ucsf" element={<UCSFPage />} />
-        <Route path="/ucsb" element={<UCSBPage />} />
+      {/* Campus Landing Pages */}
+      <Route path="/ucsc" element={<UCSCPage />} />
+      <Route path="/ucla" element={<UCLAPage />} />
+      <Route path="/ucb" element={<UCBPage />} />
+      <Route path="/ucsd" element={<UCSDPage />} />
+      <Route path="/ucd" element={<UCDPage />} />
+      <Route path="/uci" element={<UCIPage />} />
+      <Route path="/ucm" element={<UCMPage />} />
+      <Route path="/ucr" element={<UCRPage />} />
+      <Route path="/ucsf" element={<UCSFPage />} />
+      <Route path="/ucsb" element={<UCSBPage />} />
 
-        {/* Dynamic category pages */}
-        <Route path="/:school/dining" element={<DynamicDiningRoute />} />
-        <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
-        <Route path="/:school/recreation" element={<DynamicRecCenterRoute />} />
+      {/* Dynamic Category Pages */}
+      <Route path="/:school/dining" element={<DynamicDiningRoute />} />
+      <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
+      <Route path="/:school/rec" element={<DynamicRecCenterRoute />} />
 
-        {/* Rate & view */}
-        <Route path="/:school/:category/rate/:hallId" element={<RatePage />} />
-        <Route
-          path="/:school/:category/view/:hallId"
-          element={<ViewRatingPage />}
-        />
+      {/* Rate & View Pages */}
+      <Route path="/:school/:category/rate/:hallId" element={<RatePage />} />
+      <Route
+        path="/:school/:category/view/:hallId"
+        element={<ViewRatingPage />}
+      />
 
-        {/* Static */}
-        <Route path="/guidelines" element={<GuidelinesPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        {/* (Optional) catch-all 404 */}
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
-      </Routes>
-    </Router>
+      {/* Static Pages */}
+      <Route path="/guidelines" element={<GuidelinesPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+
+      {/* Redirect unknown routes to Home */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
