@@ -1,0 +1,123 @@
+/* auth.css - Shared styles for Login & Signup pages (RatePage style) */
+
+:root {
+  --primary-color: #00274c;
+  --primary-hover: #004080;
+  --background-color: #f7f7f7;
+  --card-background: #ffffff;
+  --text-color: #333333;
+  --input-background: #fff;
+  --input-border: #ccc;
+  --error-color: #e74c3c;
+  --border-radius: 12px;
+  --button-radius: 6px;
+  --transition-speed: 0.3s;
+}
+
+/* Full-page container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 4rem 1rem;
+  min-height: 80vh;
+}
+
+/* Card wrapper */
+.auth-card {
+  background: var(--card-background);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+}
+
+/* Heading */
+.auth-card h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+/* Form elements */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--input-background);
+  transition: border-color var(--transition-speed);
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Error message */
+.auth-error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+
+/* Submit button */
+.auth-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  width: fit-content;
+}
+
+.auth-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.auth-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Link text */
+.auth-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-speed);
+}
+
+.auth-link a:hover {
+  color: var(--primary-hover);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-card h2 {
+    font-size: 1.5rem;
+  }
+}

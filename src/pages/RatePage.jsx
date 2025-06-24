@@ -6,9 +6,13 @@ import StarRating from "../components/StarRating";
 import "../styles/RateDiningPage.css";
 import { schoolDiningData } from "../data/schoolDiningData";
 import { schoolLectureData } from "../data/schoolLectureData";
-import { schoolRecData } from "../data/schoolRecData"; // <-- Import rec center data
+import { schoolRecData } from "../data/schoolRecData";
 
-// Move categoryMap OUTSIDE the component for cleaner useEffect!
+// Firebase & Firestore imports
+import { db, auth } from "../firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+// Mapping categories to data keys
 const categoryMap = {
   dining: "diningHalls",
   cafe: "cafes",
@@ -17,17 +21,20 @@ const categoryMap = {
   rec: "recCenters",
 };
 
-function RatePage() {
+export default function RatePage() {
   const { school: schoolId, category, hallId: placeId } = useParams();
   const navigate = useNavigate();
 
+  // Local component state
   const [rating, setRating] = useState(null);
   const [reviewText, setReviewText] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [customTagInput, setCustomTagInput] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  // Use a mapping to choose the correct data source for each category
+  // Select appropriate data source
   const dataSourceMap = {
     dining: schoolDiningData,
     cafe: schoolDiningData,
@@ -41,22 +48,20 @@ function RatePage() {
   const categoryKey = categoryMap[category];
   const allPlaces = schoolData?.[categoryKey] || [];
 
-  // Match by id (robust!)
+  // Find the specific place by id
   let matchedPlace = allPlaces.find((place) => place.id === placeId);
 
-  // If no match, check all categories and redirect if found
+  // Redirect if the place exists under a different category
   useEffect(() => {
     if (!matchedPlace && schoolData) {
-      const fallbackKeys = Object.values(categoryMap); // includes all categories!
+      const fallbackKeys = Object.values(categoryMap);
       for (let key of fallbackKeys) {
         const places = schoolData[key] || [];
         const found = places.find((place) => place.id === placeId);
         if (found) {
-          // Get the main category by reverse lookup
-          let correctedCategory = Object.keys(categoryMap).find(
-            (k) => categoryMap[k] === key
-          );
-          if (!correctedCategory) correctedCategory = "dining";
+          const correctedCategory =
+            Object.keys(categoryMap).find((k) => categoryMap[k] === key) ||
+            "dining";
           navigate(`/${schoolId}/${correctedCategory}/rate/${placeId}`, {
             replace: true,
           });
@@ -85,25 +90,18 @@ function RatePage() {
 
   const toggleTag = (tag) => {
     setSelectedTags((prev) => {
-      if (prev.includes(tag)) {
-        return prev.filter((t) => t !== tag); // deselect tag
-      }
-      if (prev.length >= 3) return prev; // do nothing if limit reached
-      return [...prev, tag]; // add new tag
+      if (prev.includes(tag)) return prev.filter((t) => t !== tag);
+      if (prev.length >= 3) return prev;
+      return [...prev, tag];
     });
   };
 
   const addCustomTag = () => {
     const trimmed = customTagInput.trim();
     const wordCount = trimmed.split(/\s+/).length;
-    if (wordCount > 3) {
-      return;
-    }
-
-    if (trimmed && !selectedTags.includes(trimmed) && selectedTags.length < 3) {
-      setSelectedTags([...selectedTags, trimmed]);
-      setCustomTagInput("");
-    }
+    if (!trimmed || wordCount > 3 || selectedTags.length >= 3) return;
+    setSelectedTags([...selectedTags, trimmed]);
+    setCustomTagInput("");
   };
 
   const removeTag = (tag) => {
@@ -119,14 +117,31 @@ function RatePage() {
 
   const charCount = reviewText.length;
 
-  const handleSubmit = () => {
-    console.log("Rating:", rating);
-    console.log("Review:", reviewText);
-    console.log("Tags:", selectedTags);
-    setSubmitted(true);
-    setReviewText("");
-    setSelectedTags([]);
-    setCustomTagInput("");
+  // Submit review to Firestore
+  const handleSubmit = async () => {
+    setLoading(true);
+    setSubmitError("");
+    try {
+      await addDoc(collection(db, "reviews"), {
+        userId: auth.currentUser.uid,
+        school: schoolId,
+        category,
+        hallId: placeId,
+        rating,
+        text: reviewText,
+        tags: selectedTags,
+        createdAt: serverTimestamp(),
+      });
+      setSubmitted(true);
+      setReviewText("");
+      setSelectedTags([]);
+      setCustomTagInput("");
+    } catch (err) {
+      console.error("Failed to submit review", err);
+      setSubmitError("Failed to submit review. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -141,7 +156,9 @@ function RatePage() {
             {!submitted ? (
               <>
                 <StarRating onRate={setRating} />
+                {submitError && <p className="auth-error">{submitError}</p>}
 
+                {/* Tag selector */}
                 <div className="tag-selector">
                   <p className="tag-heading">Add up to 3 tags</p>
                   <div className="tag-options">
@@ -158,7 +175,6 @@ function RatePage() {
                       </button>
                     ))}
                   </div>
-
                   <div className="custom-tag-input">
                     <input
                       type="text"
@@ -167,19 +183,23 @@ function RatePage() {
                       onChange={(e) => setCustomTagInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && addCustomTag()}
                     />
-                    <button onClick={addCustomTag}>Add</button>
+                    <button type="button" onClick={addCustomTag}>
+                      Add
+                    </button>
                   </div>
-
                   <div className="selected-tags">
                     {selectedTags.map((tag, i) => (
                       <span key={i} className="selected-tag">
                         {tag}
-                        <button onClick={() => removeTag(tag)}>×</button>
+                        <button type="button" onClick={() => removeTag(tag)}>
+                          ×
+                        </button>
                       </span>
                     ))}
                   </div>
                 </div>
 
+                {/* Review textarea */}
                 <textarea
                   className="review-textarea"
                   placeholder="Leave a short review (max 300 characters)..."
@@ -196,9 +216,9 @@ function RatePage() {
                 <button
                   className="submit-review-button"
                   onClick={handleSubmit}
-                  disabled={!rating || reviewText.trim() === ""}
+                  disabled={loading || !rating || reviewText.trim() === ""}
                 >
-                  Submit
+                  {loading ? "Submitting…" : "Submit"}
                 </button>
               </>
             ) : (
@@ -214,5 +234,3 @@ function RatePage() {
     </>
   );
 }
-
-export default RatePage;
