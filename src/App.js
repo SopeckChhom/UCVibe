@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import DiningPage from "./pages/DiningPage";
 import LecturePage from "./pages/LecturePage";
 import RecCenterPage from "./pages/RecCenterPage";
+import StudySpotsPage from "./pages/StudySpotsPage";
 import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
 import LoginPage from "./pages/LoginPage";
@@ -16,7 +17,7 @@ import Dashboard from "./pages/Dashboard";
 // === Static Content ===
 import GuidelinesPage from "./pages/GuidelinesPage";
 
-// === School Landing Pages ===
+// === Campus Landing Pages ===
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
@@ -28,18 +29,16 @@ import UCRPage from "./campuses/ucr/UCRPage";
 import UCSFPage from "./campuses/ucsf/UCSFPage";
 import UCSBPage from "./campuses/ucsb/UCSBPage";
 
-// === Mock Data ===
+// === Mock Data & Dynamic Routes ===
 import { schoolDiningData } from "./data/schoolDiningData";
 import { schoolLectureData } from "./data/schoolLectureData";
 import { schoolRecData } from "./data/schoolRecData";
 
-// PrivateRoute component to guard protected routes
 function PrivateRoute({ children }) {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" replace />;
 }
 
-// ——— Dynamic Dining Route ———
 function DynamicDiningRoute() {
   const { school } = useParams();
   const data = schoolDiningData[school];
@@ -47,7 +46,6 @@ function DynamicDiningRoute() {
   return <DiningPage {...data} />;
 }
 
-// ——— Dynamic Lecture Route ———
 function DynamicLectureRoute() {
   const { school } = useParams();
   const data = schoolLectureData[school];
@@ -55,7 +53,6 @@ function DynamicLectureRoute() {
   return <LecturePage {...data} />;
 }
 
-// ——— Dynamic Rec-Center Route ———
 function DynamicRecCenterRoute() {
   const { school } = useParams();
   const data = schoolRecData[school];
@@ -73,7 +70,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
-        {/* Campus Landing Pages (public) */}
+        {/* Campus Landing Pages */}
         <Route path="/ucsc" element={<UCSCPage />} />
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
@@ -85,31 +82,32 @@ export default function App() {
         <Route path="/ucsf" element={<UCSFPage />} />
         <Route path="/ucsb" element={<UCSBPage />} />
 
-        {/* Dynamic Category Pages (public) */}
+        {/* Dynamic Category Pages */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
         <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
         <Route path="/:school/rec" element={<DynamicRecCenterRoute />} />
+        <Route path="/:school/study-spots" element={<StudySpotsPage />} />
 
-        {/* View Rating Page (public) */}
+        {/* View & Rate Pages */}
         <Route
           path="/:school/:category/view/:hallId"
           element={<ViewRatingPage />}
-        />
-
-        {/* Protected Routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
         />
         <Route
           path="/:school/:category/rate/:hallId"
           element={
             <PrivateRoute>
               <RatePage />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Protected Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
             </PrivateRoute>
           }
         />

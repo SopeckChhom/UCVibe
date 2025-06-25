@@ -31,7 +31,7 @@ function UCSCPage() {
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
           </Link>
-          <Link to="/ucsc/recreation" className="category-card">
+          <Link to="/ucsc/rec" className="category-card">
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </Link>
