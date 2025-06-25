@@ -1,30 +1,34 @@
 // src/contexts/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
-  onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebase"; // import the initialized auth instance
+import { auth } from "../firebase"; // ← import the auth instance you already export
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  // listen for auth state changes
+  // Subscribe to auth state on mount
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
-      setLoading(false);
     });
     return unsubscribe;
   }, []);
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  // Sign up with email/password + set displayName to firstName
+  function signup(email, password, firstName, lastName) {
+    return createUserWithEmailAndPassword(auth, email, password).then((cred) =>
+      updateProfile(cred.user, {
+        displayName: firstName, // you could also do `${firstName} ${lastName}`
+      })
+    );
   }
 
   function login(email, password) {
@@ -35,11 +39,15 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
-  return (
-    <AuthContext.Provider value={{ user, signup, login, logout }}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    signup,
+    login,
+    logout,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

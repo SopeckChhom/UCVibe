@@ -44,3 +44,13 @@ nav a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-greeting {
+  margin: 0 1rem;
+  font-weight: 500;
+}
