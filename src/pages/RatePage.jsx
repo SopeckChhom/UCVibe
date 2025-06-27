@@ -1,3 +1,4 @@
+// src/pages/RatePage.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
@@ -7,12 +8,9 @@ import "../styles/RateDiningPage.css";
 import { schoolDiningData } from "../data/schoolDiningData";
 import { schoolLectureData } from "../data/schoolLectureData";
 import { schoolRecData } from "../data/schoolRecData";
-
-// Firebase & Firestore imports
 import { db, auth } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-// Mapping categories to data keys
 const categoryMap = {
   dining: "diningHalls",
   cafe: "cafes",
@@ -22,10 +20,10 @@ const categoryMap = {
 };
 
 export default function RatePage() {
-  const { school: schoolId, category, hallId: placeId } = useParams();
+  const { school: schoolId, category, id: placeId } = useParams();
   const navigate = useNavigate();
 
-  // Local component state
+  // Form state
   const [rating, setRating] = useState(null);
   const [reviewText, setReviewText] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
@@ -34,7 +32,7 @@ export default function RatePage() {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // Select appropriate data source
+  // Lookup place data
   const dataSourceMap = {
     dining: schoolDiningData,
     cafe: schoolDiningData,
@@ -42,37 +40,25 @@ export default function RatePage() {
     lecture: schoolLectureData,
     rec: schoolRecData,
   };
-  const dataSource = dataSourceMap[category];
-  const schoolData = dataSource?.[schoolId];
+  const schoolData = dataSourceMap[category]?.[schoolId] || {};
+  const places = schoolData[categoryMap[category]] || [];
+  const matched = places.find((p) => p.id === placeId);
 
-  const categoryKey = categoryMap[category];
-  const allPlaces = schoolData?.[categoryKey] || [];
-
-  // Find the specific place by id
-  let matchedPlace = allPlaces.find((place) => place.id === placeId);
-
-  // Redirect if the place exists under a different category
+  // If wrong category, redirect to correct one
   useEffect(() => {
-    if (!matchedPlace && schoolData) {
-      const fallbackKeys = Object.values(categoryMap);
-      for (let key of fallbackKeys) {
-        const places = schoolData[key] || [];
-        const found = places.find((place) => place.id === placeId);
+    if (!matched && schoolData) {
+      Object.entries(categoryMap).forEach(([cat, key]) => {
+        const found = (schoolData[key] || []).find((p) => p.id === placeId);
         if (found) {
-          const correctedCategory =
-            Object.keys(categoryMap).find((k) => categoryMap[k] === key) ||
-            "dining";
-          navigate(`/${schoolId}/${correctedCategory}/rate/${placeId}`, {
-            replace: true,
-          });
-          return;
+          navigate(`/${schoolId}/${cat}/rate/${placeId}`, { replace: true });
         }
-      }
+      });
     }
-  }, [matchedPlace, schoolData, schoolId, placeId, navigate]);
+  }, [matched, schoolData, schoolId, placeId, navigate]);
 
-  const displayName = matchedPlace?.name || "Campus Spot";
+  const displayName = matched?.name || "Campus Spot";
 
+  // Tag logic
   const predefinedTags = [
     "Good Food",
     "Clean",
@@ -87,37 +73,34 @@ export default function RatePage() {
     "Accessible",
     "Limited",
   ];
-
   const toggleTag = (tag) => {
-    setSelectedTags((prev) => {
-      if (prev.includes(tag)) return prev.filter((t) => t !== tag);
-      if (prev.length >= 3) return prev;
-      return [...prev, tag];
-    });
+    setSelectedTags((prev) =>
+      prev.includes(tag)
+        ? prev.filter((t) => t !== tag)
+        : prev.length < 3
+        ? [...prev, tag]
+        : prev
+    );
   };
-
   const addCustomTag = () => {
-    const trimmed = customTagInput.trim();
-    const wordCount = trimmed.split(/\s+/).length;
-    if (!trimmed || wordCount > 3 || selectedTags.length >= 3) return;
-    setSelectedTags([...selectedTags, trimmed]);
+    const t = customTagInput.trim();
+    const words = t.split(/\s+/);
+    if (!t || words.length > 3 || selectedTags.length >= 3) return;
+    setSelectedTags([...selectedTags, t]);
     setCustomTagInput("");
   };
-
-  const removeTag = (tag) => {
+  const removeTag = (tag) =>
     setSelectedTags(selectedTags.filter((t) => t !== tag));
-  };
 
+  // Review text logic
   const handleReviewChange = (e) => {
-    const text = e.target.value;
-    if (text.length <= 300) {
-      setReviewText(text);
+    if (e.target.value.length <= 300) {
+      setReviewText(e.target.value);
     }
   };
-
   const charCount = reviewText.length;
 
-  // Submit review to Firestore
+  // Submit to Firestore
   const handleSubmit = async () => {
     setLoading(true);
     setSubmitError("");
@@ -126,7 +109,7 @@ export default function RatePage() {
         userId: auth.currentUser.uid,
         school: schoolId,
         category,
-        hallId: placeId,
+        itemId: placeId,
         rating,
         text: reviewText,
         tags: selectedTags,
@@ -137,7 +120,7 @@ export default function RatePage() {
       setSelectedTags([]);
       setCustomTagInput("");
     } catch (err) {
-      console.error("Failed to submit review", err);
+      console.error(err);
       setSubmitError("Failed to submit review. Please try again.");
     } finally {
       setLoading(false);
@@ -147,6 +130,7 @@ export default function RatePage() {
   return (
     <>
       <NavBar />
+
       <div className="page-wrapper">
         <div className="rate-container">
           <div className="rate-card">
@@ -178,7 +162,7 @@ export default function RatePage() {
                   <div className="custom-tag-input">
                     <input
                       type="text"
-                      placeholder="Add your own tag (3 words max)..."
+                      placeholder="Add your own tag (3 words max)"
                       value={customTagInput}
                       onChange={(e) => setCustomTagInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && addCustomTag()}
@@ -191,7 +175,11 @@ export default function RatePage() {
                     {selectedTags.map((tag, i) => (
                       <span key={i} className="selected-tag">
                         {tag}
-                        <button type="button" onClick={() => removeTag(tag)}>
+                        <button
+                          type="button"
+                          className="remove-tag"
+                          onClick={() => removeTag(tag)}
+                        >
                           ×
                         </button>
                       </span>
@@ -202,7 +190,7 @@ export default function RatePage() {
                 {/* Review textarea */}
                 <textarea
                   className="review-textarea"
-                  placeholder="Leave a short review (max 300 characters)..."
+                  placeholder="Leave a short review (max 300 chars)…"
                   value={reviewText}
                   onChange={handleReviewChange}
                 />
@@ -210,7 +198,7 @@ export default function RatePage() {
                   className="char-count"
                   style={{ color: charCount >= 300 ? "red" : "black" }}
                 >
-                  {charCount}/300 characters
+                  {charCount}/300
                 </p>
 
                 <button
@@ -218,18 +206,19 @@ export default function RatePage() {
                   onClick={handleSubmit}
                   disabled={loading || !rating || reviewText.trim() === ""}
                 >
-                  {loading ? "Submitting…" : "Submit"}
+                  {loading ? "Submitting…" : "Submit Review"}
                 </button>
               </>
             ) : (
               <p className="submitted-rating">
-                ✅ You rated this {rating} star{rating > 1 ? "s" : ""} and left
-                a review!
+                ✅ You rated this {rating} star
+                {rating > 1 ? "s" : ""} and left a review!
               </p>
             )}
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

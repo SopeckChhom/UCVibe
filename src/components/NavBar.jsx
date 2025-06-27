@@ -1,11 +1,25 @@
 // src/components/NavBar.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "../styles/NavBar.css";
 
 export default function NavBar() {
   const { isAuthenticated, user, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef();
+  const navigate = useNavigate();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="navbar">
@@ -14,6 +28,7 @@ export default function NavBar() {
           UCVibe
         </Link>
       </h1>
+
       <nav className="navbar-nav">
         <Link to="/" className="nav-link">
           Home
@@ -29,19 +44,37 @@ export default function NavBar() {
             </Link>
           </>
         ) : (
-          <>
-            <span className="nav-greeting"> {user.displayName} </span>
-            {user.displayName ? (
-              <span className="nav-greeting">Hello, {user.displayName}</span>
-            ) : (
-              <Link to="/account" className="nav-greeting">
-                My Account
-              </Link>
-            )}
-            <button onClick={logout} className="nav-link logout-button">
-              Log Out
+          <div className="nav-dropdown" ref={dropdownRef}>
+            <button
+              className="nav-greeting"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {"Hello, " + user.displayName || "My Account"}
+              <span className={`arrow ${menuOpen ? "open" : ""}`} />
             </button>
-          </>
+
+            {menuOpen && (
+              <div className="dropdown-menu">
+                <button
+                  type="button"
+                  className="dropdown-item"
+                  onClick={() => {
+                    navigate("/account");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Settings
+                </button>
+                <button
+                  type="button"
+                  className="dropdown-item logout-button"
+                  onClick={logout}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
+          </div>
         )}
       </nav>
     </header>

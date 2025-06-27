@@ -1,6 +1,7 @@
+// src/App.js
 import React from "react";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // === Pages ===
 import HomePage from "./pages/HomePage";
@@ -12,12 +13,11 @@ import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import Dashboard from "./pages/Dashboard";
 
 // === Static Content ===
 import GuidelinesPage from "./pages/GuidelinesPage";
 
-// === Campus Landing Pages ===
+// === Campus Landings ===
 import UCSCPage from "./campuses/ucsc/UCSCPage";
 import UCLAPage from "./campuses/ucla/UCLAPage";
 import UCBPage from "./campuses/ucb/UCBPage";
@@ -29,48 +29,56 @@ import UCRPage from "./campuses/ucr/UCRPage";
 import UCSFPage from "./campuses/ucsf/UCSFPage";
 import UCSBPage from "./campuses/ucsb/UCSBPage";
 
-// === Mock Data & Dynamic Routes ===
+// === ProtectedRoute ===
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// === Dynamic Data ===
 import { schoolDiningData } from "./data/schoolDiningData";
 import { schoolLectureData } from "./data/schoolLectureData";
 import { schoolRecData } from "./data/schoolRecData";
 
-function PrivateRoute({ children }) {
-  const { user } = useAuth();
-  return user ? children : <Navigate to="/login" replace />;
-}
-
+// Dynamic route helpers
 function DynamicDiningRoute() {
   const { school } = useParams();
   const data = schoolDiningData[school];
-  if (!data) return <h1>404 – No dining data for “{school}”</h1>;
-  return <DiningPage {...data} />;
+  return data ? (
+    <DiningPage {...data} />
+  ) : (
+    <h1>404 – No dining data for “{school}”</h1>
+  );
 }
 
 function DynamicLectureRoute() {
   const { school } = useParams();
   const data = schoolLectureData[school];
-  if (!data) return <h1>404 – No lecture data for “{school}”</h1>;
-  return <LecturePage {...data} />;
+  return data ? (
+    <LecturePage {...data} />
+  ) : (
+    <h1>404 – No lecture data for “{school}”</h1>
+  );
 }
 
 function DynamicRecCenterRoute() {
   const { school } = useParams();
   const data = schoolRecData[school];
-  if (!data) return <h1>404 – No rec centers for “{school}”</h1>;
-  return <RecCenterPage {...data} />;
+  return data ? (
+    <RecCenterPage {...data} />
+  ) : (
+    <h1>404 – No rec centers for “{school}”</h1>
+  );
 }
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* Public Routes */}
+        {/* Public */}
         <Route path="/" element={<HomePage />} />
         <Route path="/guidelines" element={<GuidelinesPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
-        {/* Campus Landing Pages */}
+        {/* Campus Landings */}
         <Route path="/ucsc" element={<UCSCPage />} />
         <Route path="/ucla" element={<UCLAPage />} />
         <Route path="/ucb" element={<UCBPage />} />
@@ -82,37 +90,27 @@ export default function App() {
         <Route path="/ucsf" element={<UCSFPage />} />
         <Route path="/ucsb" element={<UCSBPage />} />
 
-        {/* Dynamic Category Pages */}
+        {/* Dynamic Categories */}
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
         <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
         <Route path="/:school/rec" element={<DynamicRecCenterRoute />} />
         <Route path="/:school/study-spots" element={<StudySpotsPage />} />
 
-        {/* View & Rate Pages */}
+        {/* View & Rate (Protected) */}
         <Route
-          path="/:school/:category/view/:hallId"
+          path="/:school/:category/view/:id"
           element={<ViewRatingPage />}
         />
         <Route
-          path="/:school/:category/rate/:hallId"
+          path="/:school/:category/rate/:id"
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <RatePage />
-            </PrivateRoute>
+            </ProtectedRoute>
           }
         />
 
-        {/* Protected Dashboard */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-
-        {/* Redirect unknown routes to Home */}
+        {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>

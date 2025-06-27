@@ -1,21 +1,27 @@
 // src/pages/LoginPage.jsx
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../styles/auth.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const location = useLocation();
+
+  // Determine where to redirect after login
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       await login(email, password);
-      navigate("/");
+      // Send user back to their original destination (or home)
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);
     }

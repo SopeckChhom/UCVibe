@@ -30,7 +30,7 @@ function UCDPage() {
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
           </a>
-          <a href="/ucd/recreation" className="category-card">
+          <a href="/ucd/rec" className="category-card">
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </a>

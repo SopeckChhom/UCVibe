@@ -1,7 +1,7 @@
 // src/pages/SignupPage.jsx
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/auth.css";
 
 export default function SignupPage() {
@@ -16,61 +16,60 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     try {
       await signup(email, password, firstName, lastName);
-      navigate("/"); // back to home, where greeting will show
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Sign Up</h2>
+        {error && <p className="auth-error">{error}</p>}
+        <form className="auth-form" onSubmit={handleSubmit}>
           <input
             type="text"
-            required
+            className="auth-input"
+            placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            required
           />
-        </label>
-        <label>
-          Last Name
           <input
             type="text"
-            required
+            className="auth-input"
+            placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            required
           />
-        </label>
-        <label>
-          Email
           <input
             type="email"
-            required
+            className="auth-input"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </label>
-        <label>
-          Password
           <input
             type="password"
-            required
+            className="auth-input"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Log In</Link>
-      </p>
+          <button type="submit" className="auth-button">
+            Sign Up
+          </button>
+        </form>
+        <p className="auth-link">
+          Already have an account? <Link to="/login">Log In</Link>
+        </p>
+      </div>
     </div>
   );
 }

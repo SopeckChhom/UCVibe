@@ -30,7 +30,7 @@ function UCBPage() {
             <h3>Lecture Halls</h3>
             <p>Rate classrooms and lecture spaces.</p>
           </a>
-          <a href="/ucb/recreation" className="category-card">
+          <a href="/ucb/rec" className="category-card">
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </a>
