@@ -102,11 +102,18 @@ export default function RatePage() {
 
   // Submit to Firestore
   const handleSubmit = async () => {
+    console.log("🔍 handleSubmit fired", {
+      rating,
+      reviewText,
+      selectedTags,
+      user: auth.currentUser,
+    });
     setLoading(true);
     setSubmitError("");
+
     try {
-      await addDoc(collection(db, "reviews"), {
-        userId: auth.currentUser.uid,
+      const docRef = await addDoc(collection(db, "reviews"), {
+        userId: auth.currentUser?.uid,
         school: schoolId,
         category,
         itemId: placeId,
@@ -115,15 +122,19 @@ export default function RatePage() {
         tags: selectedTags,
         createdAt: serverTimestamp(),
       });
+      console.log("✅ Review written, doc ID:", docRef.id);
       setSubmitted(true);
       setReviewText("");
       setSelectedTags([]);
       setCustomTagInput("");
     } catch (err) {
-      console.error(err);
-      setSubmitError("Failed to submit review. Please try again.");
+      console.error("❌ Error writing review:", err);
+      setSubmitError(
+        err.message || "Failed to submit review. Please try again."
+      );
     } finally {
       setLoading(false);
+      console.log("— loading finished");
     }
   };
 
