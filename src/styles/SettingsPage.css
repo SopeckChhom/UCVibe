@@ -1,0 +1,47 @@
+/* src/styles/SettingsPage.css */
+.settings-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.settings-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.settings-form button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.message {
+  margin-top: 1rem;
+  color: green;
+}
+
+.settings-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.settings-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.settings-note {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 2rem;
+}

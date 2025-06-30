@@ -1,0 +1,52 @@
+.account-layout {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.account-nav {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid #00274c;
+  margin-bottom: 1.5rem;
+}
+
+.account-tab {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #00274c;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.2s ease;
+}
+
+.account-tab:hover {
+  background-color: #819eb8;
+}
+
+.account-tab.active {
+  background-color: #00274c;
+  color: white;
+}
+
+.account-content {
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.back-button {
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: none;
+  color: #1e90ff;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding-left: 0;
+}
+
+.back-button:hover {
+  color: #104e8b;
+}

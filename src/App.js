@@ -13,6 +13,10 @@ import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import AccountLayout from "./pages/account/AccountLayout";
+import ProfilePage from "./pages/account/ProfilePage";
+import SettingsPage from "./pages/account/SettingsPage";
+import RatingsPage from "./pages/account/RatingsPage";
 
 // === Static Content ===
 import GuidelinesPage from "./pages/GuidelinesPage";
@@ -112,6 +116,11 @@ export default function App() {
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/account" element={<AccountLayout />}>
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="ratings" element={<RatingsPage />} />
+        </Route>
       </Routes>
     </AuthProvider>
   );

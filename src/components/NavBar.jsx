@@ -49,7 +49,9 @@ export default function NavBar() {
               className="nav-greeting"
               onClick={() => setMenuOpen((open) => !open)}
             >
-              {"Hello, " + user.displayName || "My Account"}
+              {user?.displayName
+                ? `Hello, ${user.displayName.split(" ")[0]}`
+                : "My Account"}
               <span className={`arrow ${menuOpen ? "open" : ""}`} />
             </button>
 
@@ -59,11 +61,31 @@ export default function NavBar() {
                   type="button"
                   className="dropdown-item"
                   onClick={() => {
-                    navigate("/account");
+                    navigate("/account/profile");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Profile
+                </button>
+                <button
+                  type="button"
+                  className="dropdown-item"
+                  onClick={() => {
+                    navigate("/account/settings");
                     setMenuOpen(false);
                   }}
                 >
                   Settings
+                </button>
+                <button
+                  type="button"
+                  className="dropdown-item"
+                  onClick={() => {
+                    navigate("/account/ratings");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Ratings
                 </button>
                 <button
                   type="button"
