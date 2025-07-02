@@ -1,3 +1,4 @@
+// src/data/schoolLectureData.js
 export const schoolLectureData = {
   ucsc: {
     title: "UC Santa Cruz",

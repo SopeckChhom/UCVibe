@@ -1,3 +1,4 @@
+// src/data/schoolDiningData.js
 const generateLink = (school, category, id) =>
   `/${school}/${category}/rate/${id}`;
 

@@ -118,8 +118,13 @@ function HomePage() {
       <section className="connect">
         <h2>Connect with Us</h2>
         <p>We'd love to hear your feedback or answer any questions!</p>
-        <a href="mailto:contact@ucvibe.com" className="contact-link">
-          Email Us
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=schhom@ucsc.edu&su=UCVibe%20Feedback&body=Hey%20UCVibe%20team%2C%20I%20have%20some%20feedback..."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-link"
+        >
+          📧 Email Us
         </a>
       </section>
 

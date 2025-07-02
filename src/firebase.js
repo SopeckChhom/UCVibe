@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// TODO → replace with your own project’s values from Firebase console
 const firebaseConfig = {
   apiKey: "AIzaSyA4DTDrrQwaiAH2RvU7wDaPrJqVepOJqY0",
   authDomain: "ucvibe-web.firebaseapp.com",

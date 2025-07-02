@@ -1,3 +1,4 @@
+// src/pages/account/ProfilePage.jsx
 import React, { useState, useEffect } from "react";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";

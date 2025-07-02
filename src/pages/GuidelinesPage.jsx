@@ -1,3 +1,4 @@
+// src/pages/GuidelinesPage.jsx
 import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -140,12 +141,13 @@ export default function GuidelinesPage() {
           <div>
             <h3 className="text-2xl font-semibold mb-2">Your Rights</h3>
             <p>
-              You can access, update, or delete your data by contacting us at
+              You can access, update, or delete your data by contacting us
+              at&nbsp;
               <a
                 href="mailto:support@ucvibe.com"
                 className="text-blue-600 hover:underline"
               >
-                support@ucvibe.com
+                schhom@ucsc.edu
               </a>
               .
             </p>

@@ -9,7 +9,7 @@ export default function ProtectedRoute({ children }) {
 
   // Don’t do anything until we know the auth state
   if (loading) {
-    return null; // or return a spinner component if you like
+    return null;
   }
 
   // If not logged in, send them to login and remember where they came from
@@ -17,6 +17,5 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // Otherwise render the protected content
   return children;
 }

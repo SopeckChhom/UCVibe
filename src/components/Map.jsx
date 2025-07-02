@@ -1,3 +1,4 @@
+// src/components/Map.jsx
 import React, { useEffect } from "react";
 import { useGoogleMaps } from "../hooks/useGoogleMaps";
 import "../styles/Map.css";

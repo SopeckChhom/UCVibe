@@ -1,3 +1,4 @@
+// src/pages/account/AccountLayout.jsx
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "../../styles/AccountLayout.css";

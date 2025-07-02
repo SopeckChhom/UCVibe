@@ -1,5 +1,6 @@
+// src/components/Collapsible.jsx
 import React, { useState } from "react";
-import "../styles/Collapsible.css"; // or styles.css if that's where .dining-halls-container is
+import "../styles/Collapsible.css";
 
 function Collapsible({ title, children }) {
   const [isOpen, setIsOpen] = useState(false);

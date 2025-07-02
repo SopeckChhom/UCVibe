@@ -1,6 +1,6 @@
 // src/components/StarRating.jsx
 import React, { useState } from "react";
-import "../styles/StarRating.css"; // we'll style the stars here
+import "../styles/StarRating.css";
 
 function StarRating({ onRate }) {
   const [hovered, setHovered] = useState(0);

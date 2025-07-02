@@ -1,7 +1,8 @@
+// src/pages/RecCenterPage.jsx
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import "../styles/DiningPage.css"; // You can reuse this for styling consistency
+import "../styles/DiningPage.css";
 import "../styles/global.css";
 
 function RecCenterPage({ title, recCenters = [] }) {
