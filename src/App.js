@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 import DiningPage from "./pages/DiningPage";
 import LecturePage from "./pages/LecturePage";
 import RecCenterPage from "./pages/RecCenterPage";
-import StudySpotsPage from "./pages/StudySpotsPage";
+// import StudySpotsPage from "./pages/StudySpotsPage";
 import RatePage from "./pages/RatePage";
 import ViewRatingPage from "./pages/ViewRatingPage";
 import LoginPage from "./pages/LoginPage";
@@ -98,7 +98,7 @@ export default function App() {
         <Route path="/:school/dining" element={<DynamicDiningRoute />} />
         <Route path="/:school/lecture" element={<DynamicLectureRoute />} />
         <Route path="/:school/rec" element={<DynamicRecCenterRoute />} />
-        <Route path="/:school/study-spots" element={<StudySpotsPage />} />
+        {/* <Route path="/:school/study-spots" element={<StudySpotsPage />} /> */}
 
         {/* View & Rate (Protected) */}
         <Route

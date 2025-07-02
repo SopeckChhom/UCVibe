@@ -35,10 +35,10 @@ function UCSCPage() {
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </Link>
-          <Link to="/ucsc/study-spots" className="category-card">
+          {/* <Link to="/ucsc/study-spots" className="category-card">
             <h3>Study Spots</h3>
             <p>Share your favorite quiet corners for studying.</p>
-          </Link>
+          </Link> */}
         </div>
       </section>
 

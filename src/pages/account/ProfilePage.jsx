@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
+import "../../styles/ProfilePage.css";
 
 export default function ProfilePage() {
   const user = auth.currentUser;
@@ -31,7 +32,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div>
+    <div className="profile-page">
       <h2>Edit Your Name</h2>
       <form onSubmit={handleSave}>
         <label>
@@ -43,7 +44,6 @@ export default function ProfilePage() {
             required
           />
         </label>
-        <br />
         <label>
           Last Name:
           <input
@@ -52,9 +52,10 @@ export default function ProfilePage() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </label>
-        <br />
         <button type="submit">Save</button>
-        {message && <p>{message}</p>}
+        {message && (
+          <p className={message.includes("Error") ? "error" : ""}>{message}</p>
+        )}
       </form>
     </div>
   );

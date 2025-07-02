@@ -34,10 +34,10 @@ function UCDPage() {
             <h3>Recreation Centers</h3>
             <p>Review gyms, pools, and activity centers.</p>
           </a>
-          <a href="/ucd/study-spots" className="category-card">
+          {/* <a href="/ucd/study-spots" className="category-card">
             <h3>Study Spots</h3>
             <p>Share your favorite quiet corners for studying.</p>
-          </a>
+          </a> */}
         </div>
       </section>
 

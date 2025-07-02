@@ -20,8 +20,6 @@ export default function SettingsPage() {
       <p className="settings-note">
         For security reasons, passwords are hidden and cannot be retrieved.
         <br />
-        To update your password, please use the reset password feature on the
-        login page.
       </p>
     </div>
   );
